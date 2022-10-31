@@ -7,7 +7,7 @@ import axios from "axios";
 
 // Add to Cart
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
-  const { data } = await axios.get(`http://localhost:8002/products/${id}`);
+  const { data } = await axios.get(`https://timekeeper-back-end.herokuapp.com/products/${id}`);
 
   dispatch({
     type: ADD_TO_CART,
