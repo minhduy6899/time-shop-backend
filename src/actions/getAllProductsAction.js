@@ -7,7 +7,7 @@ export const getProductItemAction = (value) => async dispatch => {
     }
     try {
         const response = await fetch(
-            `http://localhost:8002/products/${value}`, requestOptions
+            `https://timekeeper-back-end.herokuapp.com/products/${value}`, requestOptions
         );
 
         const data = await response.json();
@@ -32,7 +32,7 @@ export const getProductsFilterAction = (dataFilter) => async dispatch => {
     }
     try {
         const response = await fetch(
-            `http://localhost:8002/products?limit=${limit}&productName=${productName}&minPrice=${minPrice}&maxPrice=${maxPrice}`, requestOptions
+            `https://timekeeper-back-end.herokuapp.com/products?limit=${limit}&productName=${productName}&minPrice=${minPrice}&maxPrice=${maxPrice}`, requestOptions
         );
 
         const data = await response.json();
@@ -60,7 +60,7 @@ export const getAllProductsAction = (value) => async dispatch => {
 
     try {
         const response = await fetch(
-            `http://localhost:8002/allProducts?limit=${value}`, requestOptions
+            `https://timekeeper-back-end.herokuapp.com/allProducts?limit=${value}`, requestOptions
         );
 
         const data = await response.json();
