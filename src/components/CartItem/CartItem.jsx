@@ -39,7 +39,7 @@ function CartItem({ deleteCartItems }) {
     dispatch(
       addItemsToCart({
         productId: productId,
-        quantity: quantity,
+        quantity: newQty,
         color: color,
         size: size,
       })
@@ -54,7 +54,7 @@ function CartItem({ deleteCartItems }) {
     dispatch(
       addItemsToCart({
         productId: productId,
-        quantity: quantity,
+        quantity: newQty,
         color: color,
         size: size,
       })

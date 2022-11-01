@@ -24,6 +24,9 @@ function Carts() {
     0
   );
 
+  let Shipping =
+    Price > 3000 ? 0 : Price > 2000 ? 100 : Price > 1000 ? 150 : 200;
+
   const deleteCartItems = (id) => {
     console.log('check id: ', id);
     dispatch(removeItemsFromCart(id));
@@ -106,7 +109,7 @@ function Carts() {
                   </td>
                   <td>
                     <p>Shipping to Nguyen Huu Kien Street, Cao Lanh</p>
-                    <p>$ {ship}</p>
+                    <p>$ {Shipping}</p>
                     <Link to='/address' className='d-flex align-items-center'>
                       <HomeIcon />
                       &nbsp;Change Address
