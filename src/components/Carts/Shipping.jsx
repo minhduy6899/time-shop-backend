@@ -130,7 +130,7 @@ const Shipping = () => {
                   <option value=''>State</option>
                   {State &&
                     State.getStatesOfCountry(country).map((item) => (
-                      <option key={item.isoCode} value={item.isoCode}>
+                      <option key={item.isoCode} value={item.name}>
                         {item.name}
                       </option>
                     ))}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageGallery from 'react-image-gallery';
 import 'react-slideshow-image/dist/styles.css';
@@ -25,6 +25,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 import './modalProductDetail.scss';
+import { addItemsToCart } from '../../actions/cartAction';
 
 const style = {
   position: 'absolute',
@@ -40,30 +41,25 @@ const style = {
 };
 var images = [];
 
+let newQty;
 function ModalProductDetail({ openModal }) {
   const { productsList, currentProduct } = useSelector(
     (reduxData) => reduxData.getAllProductsReducer
   );
+  const { cartItems } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
-
   const [open, setOpen] = React.useState(false);
+  const [product, setProduct] = React.useState('ALL');
+  const [quantity, setQuantity] = React.useState('ALL');
+  const [productType, setProductType] = useState({
+    quantity: '',
+    color: 'none',
+    size: 'none',
+  });
 
-  const handleOpen = async (paramProductId) => {
-    dispatch(getProductItemAction(paramProductId));
-    setOpen(true);
-  };
   const handleClose = () => {
     setOpen(false);
     setProduct('ALL');
-  };
-
-  const [age, setAge] = React.useState('');
-  const [product, setProduct] = React.useState('ALL');
-
-  let { productId } = useParams();
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
   };
 
   React.useEffect(() => {
@@ -76,7 +72,37 @@ function ModalProductDetail({ openModal }) {
       createImage();
     }
   }, [currentProduct]);
-  console.log('chekc currentProduct: ', currentProduct);
+
+  const selectProductType = (productId) => {
+    const cartItemFilter = cartItems.find((item, index) => {
+      return item.product === productId;
+    });
+    if (cartItemFilter) {
+      newQty = productType.quantity + quantity;
+      setQuantity(newQty);
+      setProductType({ ...productType, quantity: newQty });
+    } else {
+      newQty = productType.quantity;
+      setQuantity(newQty);
+      setProductType({ ...productType, quantity: newQty });
+    }
+    console.log('check product tyep:', productType);
+    console.log('check product id:', productId);
+    // if (currentProduct.amount > 0) {
+    dispatch(
+      addItemsToCart({
+        ...productType,
+        productId: productId,
+        quantity: newQty,
+      })
+    );
+
+    // toast.success("Product Added to cart");
+    // } else {
+    //   // toast.error("Product stock limited");
+    // }
+  };
+
   const createImage = () => {
     if (currentProduct !== 'ALL' && productsList.length > 0) {
       const thumbnail1 = currentProduct.product.thumbnail[0].img1;
@@ -167,15 +193,22 @@ function ModalProductDetail({ openModal }) {
                         <Select
                           labelId='demo-simple-select-helper-label'
                           id='demo-simple-select-helper'
-                          value={age}
+                          value={productType.size}
                           label='Size'
-                          onChange={handleChange}
+                          onChange={(e) => {
+                            setProductType({
+                              ...productType,
+                              size: e.target.value,
+                            });
+                          }}
                         >
                           <MenuItem value=''>
                             <em>None</em>
                           </MenuItem>
+                          <MenuItem value={'none'}>Size</MenuItem>
                           <MenuItem value={28}>28 mm</MenuItem>
-                          <MenuItem value={30}>30 mm</MenuItem>
+                          <MenuItem value={29}>29 mm</MenuItem>
+                          <MenuItem value={32}>32 mm</MenuItem>
                           <MenuItem value={35}>35 mm</MenuItem>
                           <MenuItem value={39}>39 mm</MenuItem>
                         </Select>
@@ -189,17 +222,24 @@ function ModalProductDetail({ openModal }) {
                         <Select
                           labelId='demo-simple-select-helper-label'
                           id='demo-simple-select-helper'
-                          value={age}
+                          value={productType.color}
                           label='Color'
-                          onChange={handleChange}
+                          onChange={(e) => {
+                            setProductType({
+                              ...productType,
+                              color: e.target.value,
+                            });
+                          }}
                         >
                           <MenuItem value=''>
                             <em>None</em>
                           </MenuItem>
-                          <MenuItem value={28}>28 mm</MenuItem>
-                          <MenuItem value={30}>30 mm</MenuItem>
-                          <MenuItem value={35}>35 mm</MenuItem>
-                          <MenuItem value={39}>39 mm</MenuItem>
+                          <MenuItem value={'none'}>Color</MenuItem>
+                          <MenuItem value={'black'}>Black</MenuItem>
+                          <MenuItem value={'blue'}>Blue</MenuItem>
+                          <MenuItem value={'white'}>White</MenuItem>
+                          <MenuItem value={'gold'}>Gold</MenuItem>
+                          <MenuItem value={'pink'}>Pink</MenuItem>
                         </Select>
                       </FormControl>
                     </div>
@@ -209,13 +249,24 @@ function ModalProductDetail({ openModal }) {
                           id='outlined-number'
                           label='Quantity'
                           type='number'
+                          onChange={(e) => {
+                            setProductType({
+                              ...productType,
+                              quantity: parseInt(e.target.value),
+                            });
+                          }}
                         />
                       </FormControl>
                     </div>
                   </div>
                   <div className='product-qty-btn d-flex'>
                     <div className='product-button'>
-                      <button type='button'>ADD TO CART</button>
+                      <button
+                        onClick={() => selectProductType(product.product._id)}
+                        type='button'
+                      >
+                        ADD TO CART
+                      </button>
                     </div>
                   </div>
                 </div>

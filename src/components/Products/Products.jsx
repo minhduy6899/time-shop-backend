@@ -27,6 +27,7 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 import './products.scss';
 import ProductCard from '../ProductCard/ProductCard';
+import ModalProductDetail from '../Modal/ModalProductDetail';
 
 const style = {
   position: 'absolute',
@@ -48,19 +49,18 @@ function Products() {
   );
   const dispatch = useDispatch();
 
-  const [open, setOpen] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
+  const [age, setAge] = React.useState('');
+  const [product, setProduct] = React.useState('ALL');
 
   const handleOpen = async (paramProductId) => {
     dispatch(getProductItemAction(paramProductId));
-    setOpen(true);
+    setOpenModal(true);
   };
   const handleClose = () => {
-    setOpen(false);
+    setOpenModal(false);
     setProduct('ALL');
   };
-
-  const [age, setAge] = React.useState('');
-  const [product, setProduct] = React.useState('ALL');
 
   let { productId } = useParams();
 
@@ -141,7 +141,8 @@ function Products() {
         </div>
       </div>
 
-      {product !== 'ALL' && images.length > 0 && (
+      <ModalProductDetail openModal={openModal} />
+      {/* {product !== 'ALL' && images.length > 0 && (
         <Modal
           open={open}
           onClose={handleClose}
@@ -264,7 +265,7 @@ function Products() {
             </div>
           </Box>
         </Modal>
-      )}
+      )} */}
     </>
   );
 }

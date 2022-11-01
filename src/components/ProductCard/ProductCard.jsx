@@ -11,22 +11,32 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import './productCard.scss';
 import { addItemsToCart } from '../../actions/cartAction';
 
-let newQty = 1;
+let newQty;
 const ProductCard = ({ index, item, handleOpen, link }) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartReducer);
 
-  const addToCartHandler = (productId) => {
-    const cartItemFilter = cartItems.some((item, index) => {
+  const addToCartHandler = (productId, color, size) => {
+    const cartItemFilter = cartItems.find((item, index) => {
       return item.product === productId;
     });
+
+    console.log('cartItemFilter', cartItemFilter);
     if (cartItemFilter) {
-      newQty++;
+      newQty = cartItemFilter.quantity + 1;
     } else {
       newQty = 1;
     }
     if (item.amount > 0) {
-      dispatch(addItemsToCart(productId, newQty));
+      dispatch(
+        addItemsToCart({
+          productId: productId,
+          quantity: newQty,
+          color: color,
+          size: size,
+        })
+      );
+
       // toast.success("Product Added to cart");
     } else {
       // toast.error("Product stock limited");
@@ -49,7 +59,7 @@ const ProductCard = ({ index, item, handleOpen, link }) => {
           <div className='button-action'>
             <ShoppingCartOutlinedIcon
               className='icon-action'
-              onClick={() => addToCartHandler(item._id)}
+              onClick={() => addToCartHandler(item._id, item.color, item.size)}
             />
             <FavoriteBorderOutlinedIcon className='icon-action' />
             <RemoveRedEyeOutlinedIcon

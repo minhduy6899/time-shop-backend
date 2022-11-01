@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useParams } from 'react-router-dom';
 import ImageGallery from 'react-image-gallery';
@@ -26,6 +26,7 @@ import {
   getAllProductsAction,
   getProductItemAction,
 } from '../../actions/getAllProductsAction';
+import { addItemsToCart } from '../../actions/cartAction';
 
 const dataReview = [
   {
@@ -52,20 +53,48 @@ const dataReview = [
 ];
 
 var images = [];
-
+let newQty = 1;
 function ProductDetail() {
   const { currentProduct, productsList } = useSelector(
     (reduxData) => reduxData.getAllProductsReducer
   );
+  const { cartItems } = useSelector((state) => state.cartReducer);
 
   const dispatch = useDispatch();
   const [age, setAge] = React.useState('');
-  const [products, setProducts] = React.useState('');
+  const [productType, setProductType] = useState({
+    quantity: 1,
+    color: '',
+    size: '',
+  });
 
   let { productId } = useParams();
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const selectProductType = () => {
+    const cartItemFilter = cartItems.find((item, index) => {
+      return item.product === productId;
+    });
+
+    // console.log('cartItemFilter', cartItemFilter);
+    // if (cartItemFilter) {
+    //   setProductType({
+    //     ...productType,
+    //     quantity: cartItemFilter.quantity + productType.quantity,
+    //   });
+    // }
+    if (cartItemFilter) {
+      newQty = cartItemFilter.quantity + 1;
+    } else {
+      newQty = 1;
+    }
+    console.log('check product tyep:', productType);
+    if (currentProduct.amount > 0) {
+      dispatch(addItemsToCart({ productId, ...productType }));
+
+      // toast.success("Product Added to cart");
+    } else {
+      // toast.error("Product stock limited");
+    }
   };
 
   React.useEffect(() => {
@@ -152,13 +181,19 @@ function ProductDetail() {
                         id='demo-simple-select-helper'
                         value={age}
                         label='Size'
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          setProductType({
+                            ...productType,
+                            size: e.target.value,
+                          });
+                        }}
                       >
                         <MenuItem value=''>
                           <em>None</em>
                         </MenuItem>
                         <MenuItem value={28}>28 mm</MenuItem>
-                        <MenuItem value={30}>30 mm</MenuItem>
+                        <MenuItem value={29}>29 mm</MenuItem>
+                        <MenuItem value={32}>32 mm</MenuItem>
                         <MenuItem value={35}>35 mm</MenuItem>
                         <MenuItem value={39}>39 mm</MenuItem>
                       </Select>
@@ -174,15 +209,21 @@ function ProductDetail() {
                         id='demo-simple-select-helper'
                         value={age}
                         label='Color'
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          setProductType({
+                            ...productType,
+                            color: e.target.value,
+                          });
+                        }}
                       >
                         <MenuItem value=''>
                           <em>None</em>
                         </MenuItem>
-                        <MenuItem value={28}>28 mm</MenuItem>
-                        <MenuItem value={32}>32 mm</MenuItem>
-                        <MenuItem value={35}>35 mm</MenuItem>
-                        <MenuItem value={39}>39 mm</MenuItem>
+                        <MenuItem value={'black'}>Black</MenuItem>
+                        <MenuItem value={'blue'}>Blue</MenuItem>
+                        <MenuItem value={'white'}>White</MenuItem>
+                        <MenuItem value={'gold'}>Gold</MenuItem>
+                        <MenuItem value={'pink'}>Pink</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
@@ -192,13 +233,21 @@ function ProductDetail() {
                         id='outlined-number'
                         label='Quantity'
                         type='number'
+                        onChange={(e) => {
+                          setProductType({
+                            ...productType,
+                            quantity: parseInt(e.target.value),
+                          });
+                        }}
                       />
                     </FormControl>
                   </div>
                 </div>
                 <div className='product-qty-btn d-flex'>
                   <div className='product-button'>
-                    <button type='button'>ADD TO CART</button>
+                    <button type='button' onClick={() => selectProductType()}>
+                      ADD TO CART
+                    </button>
                   </div>
                 </div>
               </div>

@@ -128,12 +128,10 @@ function ProductsList({ dataFilter, getDataFilter }) {
             <Grid item>
               <Pagination
                 color='warning'
-                size='large'
+                size='small'
                 count={noPage}
                 defaultPage={1}
                 onChange={changePageHandler}
-                showFirstButton
-                showLastButton
               />
             </Grid>
           </Grid>

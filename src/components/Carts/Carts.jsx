@@ -63,7 +63,7 @@ function Carts() {
             </div>
           )}
         </div>
-        <div className='col-lg-4'>
+        <div className='col-lg-4 mb-5'>
           <div className='row'>
             <table className='table table-responsive'>
               <thead>

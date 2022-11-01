@@ -210,7 +210,7 @@ function Header() {
                       textDecoration: 'none',
                     }}
                   >
-                    <img src={phone} alt='phone' />
+                    <img src={phone} alt='phone' style={{ width: '40px' }} />
                   </Box>
                   <Box>
                     {' '}
@@ -253,7 +253,11 @@ function Header() {
                         }}
                       >
                         <Badge badgeContent={Quantity} color='warning'>
-                          <img src={cart} alt='cart' />
+                          <img
+                            src={cart}
+                            alt='cart'
+                            style={{ width: '35px' }}
+                          />
                         </Badge>
                       </Box>
                       <Box>

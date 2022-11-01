@@ -6,18 +6,23 @@ import { Typography } from '@material-ui/core';
 
 import CheckoutSteps from './CheckoutSteps';
 import './confirmOrder.scss';
+import { parse } from '@fortawesome/fontawesome-svg-core';
 
 const ConfirmOrder = ({ history }) => {
   const navigate = useNavigate();
   const { shippingInfo, cartItems } = useSelector((state) => state.cartReducer);
-  const { user, userInfo } = useSelector((state) => state.userReducer);
+  const { user } = useSelector((state) => state.userReducer);
+  const userInfo = JSON.parse(localStorage.getItem('user'));
+
+  console.log('check userInfo: ', userInfo);
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
   );
 
-  const shippingCharges = subtotal > 1000 ? 0 : 200;
+  const shippingCharges =
+    subtotal > 3000 ? 0 : subtotal > 2000 ? 100 : subtotal > 1000 ? 150 : 200;
 
   const tax = subtotal * 0.18;
 
@@ -72,8 +77,8 @@ const ConfirmOrder = ({ history }) => {
                       {item.name}
                     </Link>{' '}
                     <span>
-                      {item.quantity} X ₹{item.price} ={' '}
-                      <b>₹{item.price * item.quantity}</b>
+                      {item.quantity} X ${item.price} ={' '}
+                      <b>${item.price * item.quantity}</b>
                     </span>
                   </div>
                 ))}
@@ -87,15 +92,15 @@ const ConfirmOrder = ({ history }) => {
             <div>
               <div>
                 <p>Subtotal:</p>
-                <span>₹{subtotal}</span>
+                <span>${subtotal}</span>
               </div>
               <div>
                 <p>Shipping Charges:</p>
-                <span>₹{shippingCharges}</span>
+                <span>${shippingCharges}</span>
               </div>
               <div>
                 <p>GST:</p>
-                <span>₹{tax}</span>
+                <span>${tax}</span>
               </div>
             </div>
 
@@ -103,7 +108,7 @@ const ConfirmOrder = ({ history }) => {
               <p>
                 <b>Total:</b>
               </p>
-              <span>₹{totalPrice}</span>
+              <span>${totalPrice}</span>
             </div>
 
             <button onClick={proceedToPayment}>Proceed To Payment</button>

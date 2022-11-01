@@ -31,20 +31,34 @@ function CartItem({ deleteCartItems }) {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartReducer);
 
-  const increaseQuantity = (id, quantity, amount) => {
+  const increaseQuantity = (productId, quantity, amount, color, size) => {
     const newQty = quantity + 1;
     if (amount <= quantity) {
       // return toast.error('Product amount Limited');
     }
-    dispatch(addItemsToCart(id, newQty));
+    dispatch(
+      addItemsToCart({
+        productId: productId,
+        quantity: quantity,
+        color: color,
+        size: size,
+      })
+    );
   };
 
-  const decreaseQuantity = (id, quantity) => {
+  const decreaseQuantity = (productId, quantity, color, size) => {
     const newQty = quantity - 1;
     if (1 >= quantity) {
       return;
     }
-    dispatch(addItemsToCart(id, newQty));
+    dispatch(
+      addItemsToCart({
+        productId: productId,
+        quantity: quantity,
+        color: color,
+        size: size,
+      })
+    );
   };
 
   return (
@@ -107,7 +121,12 @@ function CartItem({ deleteCartItems }) {
                   <div className='cartInput'>
                     <button
                       onClick={() =>
-                        decreaseQuantity(item.product, item.quantity)
+                        decreaseQuantity(
+                          item.product,
+                          item.quantity,
+                          item.color,
+                          item.size
+                        )
                       }
                     >
                       -
@@ -118,7 +137,9 @@ function CartItem({ deleteCartItems }) {
                         increaseQuantity(
                           item.product,
                           item.quantity,
-                          item.amount
+                          item.amount,
+                          item.color,
+                          item.size
                         )
                       }
                     >

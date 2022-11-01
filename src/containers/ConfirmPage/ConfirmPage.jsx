@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer/Footer';
 import BreadCrumb from '../../components/BreadCrumb/BreadCrumb';
-import Shipping from '../../components/Carts/Shipping';
+import Shipping from '../../components/Carts/ConfirmOrder';
 
 const breadCrumd = [
   {
@@ -18,17 +18,24 @@ const breadCrumd = [
     title: 'Shipping',
     url: '/shipping',
   },
+  {
+    title: 'Confirm',
+    url: '/confirm',
+  },
 ];
-
-function ShippingPage() {
+function ConfirmPage() {
   return (
     <>
       <Header />
-      <BreadCrumb title='Shipping' linkTo='/shipping' breadCrumd={breadCrumd} />
+      <BreadCrumb
+        title='Confirm Order'
+        linkTo='/confirm'
+        breadCrumd={breadCrumd}
+      />
       <Shipping />
       <Footer />
     </>
   );
 }
 
-export default ShippingPage;
+export default ConfirmPage;

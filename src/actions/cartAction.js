@@ -4,10 +4,11 @@ import {
   SAVE_SHIPPING_INFO,
 } from "../constants/cartType";
 import axios from "axios";
-
+// id, quantity, color, size
 // Add to Cart
-export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
-  const { data } = await axios.get(`https://timekeeper-back-end.herokuapp.com/products/${id}`);
+export const addItemsToCart = (productType) => async (dispatch, getState) => {
+
+  const { data } = await axios.get(`https://timekeeper-back-end.herokuapp.com/products/${productType.productId}`);
 
   dispatch({
     type: ADD_TO_CART,
@@ -17,9 +18,9 @@ export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
       price: data.product.promotionPrice,
       image: data.product.imageUrl,
       amount: data.product.amount,
-      color: data.product.color,
-      size: data.product.size,
-      quantity,
+      color: productType?.color || data.product.color,
+      size: productType?.size || data.product.size,
+      quantity: productType.quantity,
     },
   });
 

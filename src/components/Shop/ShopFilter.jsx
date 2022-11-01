@@ -18,6 +18,7 @@ import {
   dialogContentClasses,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import './shopFilter.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +31,17 @@ import {
   changePagePagination,
   getProductsAction,
 } from '../../actions/paginationAction';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#cf9e18',
+    },
+    secondary: {
+      main: '#11cb5f',
+    },
+  },
+});
 
 function valuetext(price) {
   return `${price}°C`;
@@ -311,20 +323,23 @@ function ShopFilter({ getDataFilter }) {
           <Typography id='non-linear-slider' gutterBottom>
             USD: From {price[0]} $ to {price[1]} $
           </Typography>
-          <Box>
-            <Slider
-              className='price-filter'
-              min={0}
-              step={10}
-              max={1000}
-              scale={calculatePrice}
-              getAriaLabel={() => 'Temperature range'}
-              value={price}
-              onChange={handleChangePrice}
-              valueLabelDisplay='auto'
-              getAriaValueText={valuetext}
-            />
-          </Box>
+          <ThemeProvider theme={theme}>
+            <Box>
+              <Slider
+                className='price-filter'
+                color='primary'
+                min={0}
+                step={10}
+                max={1000}
+                scale={calculatePrice}
+                getAriaLabel={() => 'Temperature range'}
+                value={price}
+                onChange={handleChangePrice}
+                valueLabelDisplay='auto'
+                getAriaValueText={valuetext}
+              />
+            </Box>
+          </ThemeProvider>
         </Box>
       </div>
       <div className='size-filter filter-item '>
@@ -511,7 +526,15 @@ function ShopFilter({ getDataFilter }) {
                   }}
                   sx={{ color: 'inherit' }}
                 />
-                <Typography textColor='inherit' sx={{ ml: 'auto' }}>
+                <Typography
+                  textColor='inherit'
+                  sx={{
+                    ml: 'auto',
+                    backgroundColor: 'black',
+                    width: '20px',
+                    height: '20px',
+                  }}
+                >
                   39
                 </Typography>
               </ListItem>
@@ -533,9 +556,15 @@ function ShopFilter({ getDataFilter }) {
                   }}
                   sx={{ color: 'inherit' }}
                 />
-                <Typography textColor='inherit' sx={{ ml: 'auto' }}>
-                  11
-                </Typography>
+                <Typography
+                  textColor='inherit'
+                  sx={{
+                    ml: 'auto',
+                    backgroundColor: 'blue',
+                    width: '20px',
+                    height: '20px',
+                  }}
+                ></Typography>
               </ListItem>
               <ListItem
                 variant='plain'
@@ -558,9 +587,15 @@ function ShopFilter({ getDataFilter }) {
                     handleSelectFilterColor('white', event.target.checked);
                   }}
                 />
-                <Typography textColor='inherit' sx={{ ml: 'auto' }}>
-                  16
-                </Typography>
+                <Typography
+                  textColor='inherit'
+                  sx={{
+                    ml: 'auto',
+                    backgroundColor: '#e3e6f3',
+                    width: '20px',
+                    height: '20px',
+                  }}
+                ></Typography>
               </ListItem>
               <ListItem variant='plain' sx={{ borderRadius: 'sm' }}>
                 <Checkbox
@@ -579,9 +614,15 @@ function ShopFilter({ getDataFilter }) {
                     handleSelectFilterColor('brown', event.target.checked);
                   }}
                 />
-                <Typography textColor='inherit' sx={{ ml: 'auto' }}>
-                  21
-                </Typography>
+                <Typography
+                  textColor='inherit'
+                  sx={{
+                    ml: 'auto',
+                    backgroundColor: 'gold',
+                    width: '20px',
+                    height: '20px',
+                  }}
+                ></Typography>
               </ListItem>
               <ListItem variant='plain' sx={{ borderRadius: 'sm' }}>
                 <Checkbox
@@ -600,9 +641,15 @@ function ShopFilter({ getDataFilter }) {
                     handleSelectFilterColor('pink', event.target.checked);
                   }}
                 />
-                <Typography textColor='inherit' sx={{ ml: 'auto' }}>
-                  21
-                </Typography>
+                <Typography
+                  textColor='inherit'
+                  sx={{
+                    ml: 'auto',
+                    backgroundColor: 'Pink',
+                    width: '20px',
+                    height: '20px',
+                  }}
+                ></Typography>
               </ListItem>
             </List>
           </Box>

@@ -17,6 +17,8 @@ import ConfirmOrder from "./components/Carts/ConfirmOrder";
 import Payment from "./components/Carts/Payment";
 import { useSelector } from "react-redux";
 import ShippingPage from "./containers/ShippingPage/ShippingPage";
+import ContactPage from "./containers/ContactPage/ContactPage";
+import ConfirmPage from "./containers/ConfirmPage/ConfirmPage";
 
 
 
@@ -49,15 +51,14 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<HomePage />} />
-        {/* <Route exact path="/login" element={<FormSignin />} /> */}
         <Route exact path="/products" element={<ShopPage />} />
         <Route exact path="/products/:productId" element={<ProductDetailsPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/contactus" element={<HomePage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route exact path="/shipping" element={<ShippingPage />} />
-        <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+        <Route exact path="/order/confirm" element={<ConfirmPage />} />
       </Routes>
     </Router>
   );

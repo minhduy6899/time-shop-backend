@@ -64,9 +64,16 @@ function RelatedProducts() {
     setOpen(true);
   };
 
-  const addToCartHandler = (amount, productId) => {
+  const addToCartHandler = (amount, productId, color, size) => {
     if (amount > 0) {
-      dispatch(addItemsToCart(productId, 1));
+      dispatch(
+        addItemsToCart({
+          productId: productId,
+          quantity: 1,
+          color: color,
+          size: size,
+        })
+      );
       // toast.success("Product Added to cart");
     } else {
       // toast.error("Product stock limited");
@@ -138,7 +145,12 @@ function RelatedProducts() {
                             <ShoppingCartOutlinedIcon
                               className='icon-action'
                               onClick={() =>
-                                addToCartHandler(item.amount, item._id)
+                                addToCartHandler(
+                                  item.amount,
+                                  item._id,
+                                  item.color,
+                                  item.size
+                                )
                               }
                             />
                             <FavoriteBorderOutlinedIcon className='icon-action' />
