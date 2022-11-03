@@ -18,12 +18,12 @@ const Payment = ({ history }) => {
   const payBtn = useRef(null);
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cartReducer);
-  const { user } = useSelector((state) => state.userReducer);
+  // const { user } = useSelector((state) => state.userReducer);
   const { error } = useSelector((state) => state.newOrderReducer);
 
-  const paymentData = {
-    amount: Math.round(orderInfo.totalPrice * 100),
-  };
+  // const paymentData = {
+  //   amount: Math.round(orderInfo.totalPrice * 100),
+  // };
 
   const order = {
     shippingInfo,

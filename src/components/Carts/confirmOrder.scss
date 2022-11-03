@@ -14,9 +14,6 @@
   padding-bottom: 0%;
 }
 
-.confirmshippingArea > p {
-}
-
 .confirmshippingAreaBox,
 .confirmCartItemsContainer {
   margin: 2vmax;
@@ -34,10 +31,6 @@
   margin: 0 1vmax;
   color: #575757;
 }
-
-.confirmCartItems > p {
-}
-
 .confirmCartItems {
   padding: 5vmax;
   padding-top: 2vmax;
@@ -125,20 +118,9 @@
     border-top: 1px solid rgba(0, 0, 0, 0.247);
   }
 
-  .confirmshippingArea > p {
-  }
-
   .confirmshippingAreaBox > div {
     display: flex;
     margin: 6vw 0;
-  }
-
-  .confirmshippingAreaBox > div > p {
-  }
-  .confirmshippingAreaBox > div > span {
-  }
-
-  .confirmCartItems > p {
   }
 
   .confirmCartItemsContainer {
@@ -158,18 +140,12 @@
     width: 30%;
   }
 
-  .confirmCartItemsContainer > div > span {
-  }
-
   .orderSummary {
     padding: 12vw;
   }
 
   .orderSummary > p {
     padding: 4vw;
-  }
-
-  .orderSummary > div > div {
   }
 
   .orderSummaryTotal {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Typography, Stepper, StepLabel, Step } from '@material-ui/core';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';

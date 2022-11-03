@@ -28,15 +28,15 @@ function FormSignin() {
       });
   };
 
-  const logoutGoogle = () => {
-    signOut(auth)
-      .then(() => {
-        setUser(null);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  // const logoutGoogle = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       setUser(null);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
 
   useEffect(() => {
     onAuthStateChanged(auth, (result) => {

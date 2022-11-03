@@ -7,7 +7,6 @@ import PublicIcon from '@mui/icons-material/Public';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
 import { Country, State } from 'country-state-city';
-import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 
 import './shipping.scss';

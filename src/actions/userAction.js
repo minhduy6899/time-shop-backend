@@ -57,13 +57,12 @@ export const login = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      `http://localhost:5000/login`,
+      `https://timekeeper-back-end.herokuapp.com/login`,
       userData,
       config
     );
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
-    console.log('data login: ', data)
     localStorage.setItem('@token', data.accessToken);
     localStorage.setItem(
       'userLogin',
@@ -83,7 +82,6 @@ export const login = (userData) => async (dispatch) => {
 
 // Register
 export const register = (userData) => async (dispatch) => {
-  console.log('check user data: ', userData)
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
 
@@ -92,7 +90,6 @@ export const register = (userData) => async (dispatch) => {
     const { data } = await axios.post(`https://timekeeper-back-end.herokuapp.com/customers`, userData, config);
 
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
-    console.log('data register: ', data)
     localStorage.setItem('@token', data.accessToken);
     localStorage.setItem(
       'userLogin',

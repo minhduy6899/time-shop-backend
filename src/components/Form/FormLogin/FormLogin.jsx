@@ -10,7 +10,7 @@ import userSignin from '../../../assets/images/user.png';
 import auth from '../../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFirebase, register, login } from '../../../actions/userAction';
-import { async } from '@firebase/util';
+// import { async } from '@firebase/util';
 
 function FormLogin({
   setUserLogin,
@@ -22,7 +22,7 @@ function FormLogin({
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.cartReducer);
+  // const { userInfo } = useSelector((state) => state.cartReducer);
   const { error, user } = useSelector((state) => state.userReducer);
   const [changeForm, setChangeForm] = useState('login');
   const [formDataRegister, updateFormDataRegister] = React.useState();
@@ -38,7 +38,6 @@ function FormLogin({
       [e.target.name]: e.target.value.trim(),
     });
   };
-  console.log('check formRegister: ', formDataRegister);
   const handleChangeLogin = (e) => {
     updateFormDataLogin({
       ...formDataLogin,
@@ -47,7 +46,6 @@ function FormLogin({
       [e.target.name]: e.target.value.trim(),
     });
   };
-  console.log('check login: ', JSON.stringify(formDataRegister));
   const handleChangeForm = (e, form) => {
     e.preventDefault();
     setChangeForm(form);
@@ -70,7 +68,6 @@ function FormLogin({
           localStorage.setItem('@token', token);
           navigate('/');
         }
-        console.log('check result: ', result);
         setUserLogin(result);
         dispatch(loginFirebase(result));
         setOpenFormLogin(false);
@@ -80,17 +77,17 @@ function FormLogin({
       });
   }, []);
 
-  const logoutGoogle = useCallback(() => {
-    setAnchorEl(null);
-    signOut(auth)
-      .then(() => {
-        setUserLogin(null);
-        localStorage.removeItem('@token');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  });
+  // const logoutGoogle = useCallback(() => {
+  //   setAnchorEl(null);
+  //   signOut(auth)
+  //     .then(() => {
+  //       setUserLogin(null);
+  //       localStorage.removeItem('@token');
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // });
 
   useEffect(() => {
     if (!error && user) {

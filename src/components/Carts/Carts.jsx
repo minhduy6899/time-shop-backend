@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 
-import { addItemsToCart, removeItemsFromCart } from '../../actions/cartAction';
+import { removeItemsFromCart } from '../../actions/cartAction';
 import CartItem from '../CartItem/CartItem';
 import FormLogin from '../Form/FormLogin/FormLogin';
 

@@ -103,7 +103,6 @@ function Header() {
     setLanguage(event.target.value);
   };
 
-  console.log('check userlogin: ', userLogin);
   return (
     <header>
       {/* PC - tablet */}

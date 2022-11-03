@@ -14,8 +14,6 @@ const MyOrders = () => {
   const { loading, error, orders } = useSelector((state) => state.myOrdersReducer);
   const { user } = useSelector((state) => state.userReducer);
 
-  console.log('user', user)
-
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.6 },
 
