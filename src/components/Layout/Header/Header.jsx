@@ -522,9 +522,13 @@ function Header() {
             />
           </div>
           <div className='header-cart'>
-            <ShoppingCartOutlinedIcon
-              style={{ fontSize: '33px', color: 'white' }}
-            />
+            <Badge badgeContent={Quantity} color='warning'>
+              <Link to='/cart'>
+                <ShoppingCartOutlinedIcon
+                  style={{ fontSize: '33px', color: 'white' }}
+                />
+              </Link>
+            </Badge>
           </div>
         </div>
         <div className='header-bottom-mobile d-flex align-items-center'>

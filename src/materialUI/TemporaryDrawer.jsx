@@ -18,6 +18,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
+import { Link } from 'react-router-dom';
 
 export default function TemporaryDrawer({
   userLogin,
@@ -47,26 +48,32 @@ export default function TemporaryDrawer({
     {
       title: 'Home',
       icon: <HomeOutlinedIcon />,
+      link: '/',
     },
     {
-      title: 'Features',
+      title: 'Shop',
       icon: <FeaturedPlayListOutlinedIcon />,
+      link: '/products',
     },
     {
       title: 'Special',
       icon: <GradeOutlinedIcon />,
+      link: '/',
     },
     {
       title: 'Blog',
       icon: <BookOutlinedIcon />,
+      link: '/blog',
     },
     {
       title: 'Contact Us',
       icon: <AlternateEmailOutlinedIcon />,
+      link: '/contact',
     },
     {
       title: 'About Us',
       icon: <InfoOutlinedIcon />,
+      link: '/about',
     },
   ];
 
@@ -94,10 +101,23 @@ export default function TemporaryDrawer({
     >
       <List>
         {dataMenu.map((item, index) => (
-          <ListItem key={item.title} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.title} />
+          <ListItem
+            key={item.title}
+            disablePadding
+            sx={{ justifyContent: 'flex-start' }}
+          >
+            <ListItemButton sx={{ justifyContent: 'flex-start' }}>
+              <Link
+                to={item.link}
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </Link>
             </ListItemButton>
           </ListItem>
         ))}
