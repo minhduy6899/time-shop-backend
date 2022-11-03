@@ -19,6 +19,10 @@ import { useSelector } from "react-redux";
 import ShippingPage from "./containers/ShippingPage/ShippingPage";
 import ContactPage from "./containers/ContactPage/ContactPage";
 import ConfirmPage from "./containers/ConfirmPage/ConfirmPage";
+import PaymentPage from "./containers/PaymentPage/PaymentPage";
+import OrderSuccess from "./components/Carts/OrderSuccess";
+import MyOrders from "./components/Order/MyOrder";
+import MyOrderPage from "./containers/OrderPage/MyOrderPage";
 
 
 
@@ -59,6 +63,9 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route exact path="/shipping" element={<ShippingPage />} />
         <Route exact path="/order/confirm" element={<ConfirmPage />} />
+        <Route exact path="/payment" element={<PaymentPage />} />
+        <Route exact path="/orderSuccess" element={<OrderSuccess />} />
+        <Route exact path="/orders" element={<MyOrderPage />} />
       </Routes>
     </Router>
   );

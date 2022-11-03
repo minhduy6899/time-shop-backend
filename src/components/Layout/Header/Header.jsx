@@ -75,17 +75,21 @@ function Header() {
       .catch((error) => {
         console.error(error);
       });
+    setUserLogin(null);
+    localStorage.removeItem('userLogin');
   });
 
   useEffect(() => {
-    onAuthStateChanged(auth, (result) => {
-      if (result) {
-        setUserLogin(result);
-      } else {
-        setUserLogin(null);
-      }
-    });
-  }, [userLogin]);
+    // onAuthStateChanged(auth, (result) => {
+    //   if (result) {
+    //     setUserLogin(result);
+    //   } else {
+    //     setUserLogin(null);
+    //   }
+    // });
+    let userInfo = JSON.parse(localStorage.getItem('userLogin'));
+    setUserLogin(userInfo);
+  }, []);
 
   const [open, setOpen] = useState(false);
   const [eur, setEur] = React.useState('');
@@ -99,6 +103,7 @@ function Header() {
     setLanguage(event.target.value);
   };
 
+  console.log('check userlogin: ', userLogin);
   return (
     <header>
       {/* PC - tablet */}
@@ -115,6 +120,7 @@ function Header() {
                   mx: 3,
                   my: 3,
                   display: { xs: 'none', md: 'flex' },
+                  paddingLeft: '39px',
                   fontFamily: 'monospace',
                   fontWeight: 700,
                   letterSpacing: '.3rem',
@@ -307,7 +313,8 @@ function Header() {
                             style={{
                               borderRadius: '9999px',
                             }}
-                            src={userLogin.photoURL}
+                            src={userLogin.photoURL1}
+                            srcSet={userLogin.photoURL}
                             alt='avatar user'
                           />
                         </Box>
@@ -338,7 +345,8 @@ function Header() {
                                 borderRadius: '9999px',
                                 width: '30px',
                               }}
-                              src={userLogin.photoURL}
+                              src={userLogin.photoURL1}
+                              srcSet={userLogin.photoURL}
                               alt='avatar user'
                             />
                             &nbsp;
@@ -371,6 +379,7 @@ function Header() {
                           handleOpenFormLogin={handleOpenFormLogin}
                           openFormLogin={openFormLogin}
                           setOpenFormLogin={setOpenFormLogin}
+                          handleCloseFormLogin={handleCloseFormLogin}
                         />
                       </Box>
                     )}

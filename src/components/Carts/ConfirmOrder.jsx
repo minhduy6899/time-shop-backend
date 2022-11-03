@@ -14,8 +14,6 @@ const ConfirmOrder = ({ history }) => {
   const { user } = useSelector((state) => state.userReducer);
   const userInfo = JSON.parse(localStorage.getItem('user'));
 
-  console.log('check userInfo: ', userInfo);
-
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -40,7 +38,7 @@ const ConfirmOrder = ({ history }) => {
 
     sessionStorage.setItem('orderInfo', JSON.stringify(data));
 
-    navigate('/process/payment');
+    navigate('/payment');
   };
 
   return (

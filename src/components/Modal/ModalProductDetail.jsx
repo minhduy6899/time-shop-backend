@@ -86,8 +86,6 @@ function ModalProductDetail({ openModal }) {
       setQuantity(newQty);
       setProductType({ ...productType, quantity: newQty });
     }
-    console.log('check product tyep:', productType);
-    console.log('check product id:', productId);
     // if (currentProduct.amount > 0) {
     dispatch(
       addItemsToCart({

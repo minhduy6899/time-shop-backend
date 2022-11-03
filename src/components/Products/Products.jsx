@@ -123,21 +123,15 @@ function Products() {
           </div>
         </div>
         <div className='products-best-sellers d-flex flex-wrap flex-row'>
-          {!loading
-            ? productsList.map((item, index) => (
-                <ProductCard
-                  key={index}
-                  item={item}
-                  index={index}
-                  handleOpen={handleOpen}
-                  link={'/products/'}
-                />
-              ))
-            : [
-                ...Array(12).map((index) => (
-                  <Skeleton key={index} height={380} width='100%' />
-                )),
-              ]}
+          {productsList?.map((item, index) => (
+            <ProductCard
+              key={index}
+              item={item}
+              index={index}
+              handleOpen={handleOpen}
+              link={'/products/'}
+            />
+          ))}
         </div>
       </div>
 

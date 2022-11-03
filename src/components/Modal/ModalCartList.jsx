@@ -29,7 +29,6 @@ const ModalCartList = () => {
     // navigate('/shipping');
   };
 
-  console.log('check cartItems: ', cartItems);
   return (
     <div className='sc-layouts-cart-widget'>
       <div className='widget-shopping-cart'>

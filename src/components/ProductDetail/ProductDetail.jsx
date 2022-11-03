@@ -75,7 +75,6 @@ function ProductDetail() {
       return item.product === productId;
     });
 
-    // console.log('cartItemFilter', cartItemFilter);
     // if (cartItemFilter) {
     //   setProductType({
     //     ...productType,
@@ -87,7 +86,6 @@ function ProductDetail() {
     } else {
       newQty = 1;
     }
-    console.log('check product tyep:', productType);
     if (currentProduct.amount > 0) {
       dispatch(addItemsToCart({ productId, ...productType }));
 

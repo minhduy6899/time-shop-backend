@@ -13,7 +13,6 @@ function Carts() {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartReducer);
   const [ship, setShip] = useState(30);
-  const [userLogin, setUserLogin] = useState(null);
   const [openFormLogin, setOpenFormLogin] = React.useState(false);
 
   const handleOpenFormLogin = () => setOpenFormLogin(true);
@@ -28,20 +27,17 @@ function Carts() {
     Price > 3000 ? 0 : Price > 2000 ? 100 : Price > 1000 ? 150 : 200;
 
   const deleteCartItems = (id) => {
-    console.log('check id: ', id);
     dispatch(removeItemsFromCart(id));
   };
 
   const checkoutHandler = () => {
     let userToken = localStorage.getItem('@token');
-    console.log('check user login: ', userLogin);
     if (userToken) {
       navigate('/shipping');
     }
     handleOpenFormLogin();
   };
 
-  console.log('check cartitem after delete: ', cartItems);
   return (
     <div className='carts'>
       <div className='row mt-5'>

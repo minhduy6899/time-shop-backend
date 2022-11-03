@@ -50,34 +50,61 @@ export const loginFirebase = (userInfo) => async (dispatch) => {
 };
 
 // Login
-export const login = (email, password) => async (dispatch) => {
+export const login = (userData) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
 
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      `/api/v1/login`,
-      { email, password },
+      `http://localhost:5000/login`,
+      userData,
       config
     );
 
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
+    console.log('data login: ', data)
+    localStorage.setItem('@token', data.accessToken);
+    localStorage.setItem(
+      'userLogin',
+      JSON.stringify({
+        displayName: data.user.username,
+        email: data.user.fullName,
+        photoURL1:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK6uAwJ2JNN2hrgWi18n2nGk5iJ9yF7N7ghg&usqp=CAU',
+        photoURL:
+          'https://bleedingcool.com/wp-content/uploads/2019/04/johnwick.keanureeves-900x900.jpg',
+      })
+    );
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
+    dispatch({ type: LOGIN_FAIL, payload: error });
   }
 };
 
 // Register
 export const register = (userData) => async (dispatch) => {
+  console.log('check user data: ', userData)
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
 
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    const config = { headers: { "Content-Type": "application/json" } };
 
-    const { data } = await axios.post(`/api/v1/register`, userData, config);
+    const { data } = await axios.post(`https://timekeeper-back-end.herokuapp.com/customers`, userData, config);
 
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+    console.log('data register: ', data)
+    localStorage.setItem('@token', data.accessToken);
+    localStorage.setItem(
+      'userLogin',
+      JSON.stringify({
+        displayName: data.user.username,
+        email: data.user.fullName,
+        photoURL1:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK6uAwJ2JNN2hrgWi18n2nGk5iJ9yF7N7ghg&usqp=CAU',
+        photoURL:
+          'https://bleedingcool.com/wp-content/uploads/2019/04/johnwick.keanureeves-900x900.jpg',
+      })
+    );
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
@@ -91,7 +118,7 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/me`);
+    const { data } = await axios.get(`https://timekeeper-back-end.herokuapp.com/customers`);
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -101,13 +128,13 @@ export const loadUser = () => async (dispatch) => {
 
 // Logout User
 export const logout = () => async (dispatch) => {
-  try {
-    await axios.get(`/api/v1/logout`);
+  // try {
+  //   await axios.get(`/api/v1/logout`);
 
-    dispatch({ type: LOGOUT_SUCCESS });
-  } catch (error) {
-    dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
-  }
+  dispatch({ type: LOGOUT_SUCCESS });
+  // } catch (error) {
+  //   dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+  // }
 };
 
 // Update Profile

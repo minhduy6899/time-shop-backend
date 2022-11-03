@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useState } from 'react';
 import { Box, Button, Modal } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,8 @@ import './formLogin.scss';
 import userSignin from '../../../assets/images/user.png';
 import auth from '../../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginFirebase } from '../../../actions/userAction';
+import { loginFirebase, register, login } from '../../../actions/userAction';
+import { async } from '@firebase/util';
 
 function FormLogin({
   setUserLogin,
@@ -21,25 +22,43 @@ function FormLogin({
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const alert = useAlert();
   const { userInfo } = useSelector((state) => state.cartReducer);
+  const { error, user } = useSelector((state) => state.userReducer);
   const [changeForm, setChangeForm] = useState('login');
-  const [formData, updateFormData] = React.useState();
+  const [formDataRegister, updateFormDataRegister] = React.useState();
+  const [formDataLogin, updateFormDataLogin] = React.useState();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenuUser = Boolean(anchorEl);
 
-  const handleChange = (e) => {
-    updateFormData({
-      ...formData,
+  const handleChangeRegister = (e) => {
+    updateFormDataRegister({
+      ...formDataRegister,
 
       // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
     });
   };
+  console.log('check formRegister: ', formDataRegister);
+  const handleChangeLogin = (e) => {
+    updateFormDataLogin({
+      ...formDataLogin,
 
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+  console.log('check login: ', JSON.stringify(formDataRegister));
   const handleChangeForm = (e, form) => {
     e.preventDefault();
     setChangeForm(form);
+  };
+
+  const registerUser = () => {
+    dispatch(register(formDataRegister));
+  };
+
+  const loginUser = async () => {
+    dispatch(login(formDataLogin));
   };
 
   const loginGoogle = useCallback(async (event) => {
@@ -51,9 +70,9 @@ function FormLogin({
           localStorage.setItem('@token', token);
           navigate('/');
         }
+        console.log('check result: ', result);
         setUserLogin(result);
         dispatch(loginFirebase(result));
-        console.log('check result: ', result);
         setOpenFormLogin(false);
       })
       .catch((error) => {
@@ -72,6 +91,16 @@ function FormLogin({
         console.error(error);
       });
   });
+
+  useEffect(() => {
+    if (!error && user) {
+      let userLoginInfo = JSON.parse(localStorage.getItem('userLogin'));
+      if (userLoginInfo && setUserLogin) {
+        setUserLogin(userLoginInfo);
+      }
+      setOpenFormLogin(false);
+    }
+  }, [user]);
 
   return (
     <div className='form-login'>
@@ -92,12 +121,7 @@ function FormLogin({
           <div className='form-login-content'>
             <div className='left'></div>
             {changeForm === 'register' ? (
-              <form
-                action='http://localhost:8002/customers'
-                className='log-in'
-                autoComplete='off'
-                method='POST'
-              >
+              <div className='log-in'>
                 <h4 className='login-form-title'>
                   We are <span>TIME</span>
                 </h4>
@@ -107,6 +131,7 @@ function FormLogin({
                 <div className='d-flex'>
                   <div className='floating-label'>
                     <input
+                      onChange={(e) => handleChangeRegister(e)}
                       placeholder='Username'
                       type='email'
                       name='username'
@@ -117,6 +142,7 @@ function FormLogin({
                   </div>
                   <div className='floating-label'>
                     <input
+                      onChange={(e) => handleChangeRegister(e)}
                       placeholder='Password'
                       type='password'
                       name='password'
@@ -128,6 +154,7 @@ function FormLogin({
                 </div>
                 <div className='floating-label'>
                   <input
+                    onChange={(e) => handleChangeRegister(e)}
                     placeholder='Fullname'
                     type='text'
                     name='fullName'
@@ -138,6 +165,7 @@ function FormLogin({
                 </div>
                 <div className='floating-label'>
                   <input
+                    onChange={(e) => handleChangeRegister(e)}
                     placeholder='Phone'
                     type='number'
                     name='phone'
@@ -148,6 +176,7 @@ function FormLogin({
                 </div>
                 <div className='floating-label'>
                   <input
+                    onChange={(e) => handleChangeRegister(e)}
                     placeholder='Address'
                     type='text'
                     name='address'
@@ -156,7 +185,11 @@ function FormLogin({
                   />
                   <label htmlFor='address'>Address:</label>
                 </div>
-                <button type='submit' className='btn-login'>
+                <button
+                  type='submit'
+                  className='btn-login'
+                  onClick={() => registerUser()}
+                >
                   Register
                 </button>
                 <div className='bottom d-flex justify-content-between align-items-center'>
@@ -173,22 +206,24 @@ function FormLogin({
                     Login with google
                   </div>
                 </div>
-              </form>
+              </div>
             ) : (
-              <form
-                action='http://localhost:8002/login'
-                className='log-in'
-                autoComplete='off'
-                method='POST'
-              >
+              <div className='log-in'>
                 <h4 className='login-form-title'>
                   We are <span>TIME</span>
                 </h4>
                 <p className='login-form-description'>
                   Welcome back! Log in to your account to view today's clients:
                 </p>
+                {error && (
+                  <small style={{ color: 'red', margin: 'auto' }}>
+                    {error}
+                  </small>
+                )}
+
                 <div className='floating-label'>
                   <input
+                    onChange={(e) => handleChangeLogin(e)}
                     placeholder='Email'
                     type='email'
                     name='username'
@@ -199,6 +234,7 @@ function FormLogin({
                 </div>
                 <div className='floating-label'>
                   <input
+                    onChange={(e) => handleChangeLogin(e)}
                     placeholder='Password'
                     type='password'
                     name='password'
@@ -207,7 +243,11 @@ function FormLogin({
                   />
                   <label htmlFor='password'>Password:</label>
                 </div>
-                <button type='submit' className='btn-login'>
+                <button
+                  type='submit'
+                  className='btn-login'
+                  onClick={() => loginUser()}
+                >
                   Log in
                 </button>
                 <div className='bottom d-flex justify-content-between align-items-center'>
@@ -224,7 +264,7 @@ function FormLogin({
                     Login with google
                   </div>
                 </div>
-              </form>
+              </div>
             )}
           </div>
         </Box>

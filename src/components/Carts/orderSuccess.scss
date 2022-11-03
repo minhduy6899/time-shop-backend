@@ -1,8 +1,12 @@
+@use '../../scss/' as vn;
+@import '../../scss/variables';
+@import '../../scss/mixin';
+
 .orderSuccess {
   margin: auto;
   text-align: center;
   padding: 10vmax;
-  height: 50vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +14,7 @@
 }
 .orderSuccess > svg {
   font-size: 7vmax;
-  color: tomato;
+  color: $main-color;
 }
 .orderSuccess > p {
   font-size: 2vmax;

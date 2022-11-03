@@ -66,7 +66,6 @@ function ProductsList({ dataFilter, getDataFilter }) {
   }, [productsFiltered, noPage, currentPage, dataFilter]);
 
   const handleChangeSort = (event) => {
-    console.log('check sortxxxxxxxx: ', event.target.value);
     setSort(event.target.value);
     getDataFilter({
       ...dataFilter,

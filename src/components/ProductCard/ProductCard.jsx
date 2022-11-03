@@ -21,7 +21,6 @@ const ProductCard = ({ index, item, handleOpen, link }) => {
       return item.product === productId;
     });
 
-    console.log('cartItemFilter', cartItemFilter);
     if (cartItemFilter) {
       newQty = cartItemFilter.quantity + 1;
     } else {
@@ -45,25 +44,27 @@ const ProductCard = ({ index, item, handleOpen, link }) => {
 
   return (
     <div key={index} className='product-card'>
-      <div className='product-inner'>
-        <div className='product-top'>
-          <div className='product-badge'>{item.badge}</div>
+      <div className='product-inner' aria-hidden='true'>
+        <div className='product-top placeholder-glow'>
+          <div className='product-badge'>{item?.badge}</div>
           <a className='product-link' href='/#'>
             <div className='cover-image'>
-              <img src={item.imageUrl} alt='cover' loading='lazy' />
+              <img src={item?.imageUrl} alt='cover' loading='lazy' />
             </div>
             <div className='hover-image'>
-              <img src={item.imageUrl} alt='hover' loading='lazy' />
+              <img src={item?.imageUrl} alt='hover' loading='lazy' />
             </div>
           </a>
           <div className='button-action'>
             <ShoppingCartOutlinedIcon
               className='icon-action'
-              onClick={() => addToCartHandler(item._id, item.color, item.size)}
+              onClick={() =>
+                addToCartHandler(item?._id, item?.color, item?.size)
+              }
             />
             <FavoriteBorderOutlinedIcon className='icon-action' />
             <RemoveRedEyeOutlinedIcon
-              onClick={() => handleOpen(item._id)}
+              onClick={() => handleOpen(item?._id)}
               className='icon-action'
             />
           </div>
@@ -72,24 +73,24 @@ const ProductCard = ({ index, item, handleOpen, link }) => {
           <div className='product-description'>
             <div className='product-name'>
               <h4>
-                <Link to={link + item._id}>{item.name}</Link>
+                <Link to={link + item?._id}>{item?.name}</Link>
               </h4>
             </div>
             <div className='product-rating'>
               <Stack spacing={1}>
                 <Rating
                   name='half-rating'
-                  defaultValue={item.ratings || 3.5}
+                  defaultValue={item?.ratings || 3.5}
                   precision={0.5}
                 />
               </Stack>
             </div>
             <div className='product-price'>
               <div className='old-price'>
-                <small>${item.buyPrice}.00</small>
+                <small>${item?.buyPrice}.00</small>
               </div>
               <div className='new-price'>
-                <p>${item.promotionPrice}.00</p>
+                <p>${item?.promotionPrice}.00</p>
               </div>
             </div>
           </div>
