@@ -166,7 +166,8 @@ function RelatedProducts() {
                               <h4>
                                 <a
                                   href={
-                                    'http://localhost:3000/products/' + item._id
+                                    'https://darling-semifreddo-5110ea.netlify.app/products/' +
+                                    item._id
                                   }
                                 >
                                   {item.name}

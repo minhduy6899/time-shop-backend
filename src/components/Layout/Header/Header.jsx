@@ -349,7 +349,7 @@ function Header() {
                               alt='avatar user'
                             />
                             &nbsp;
-                            {userLogin.displayName}
+                            {userLogin?.displayName}
                           </MenuItem>
                           <MenuItem onClick={handleClose}>
                             <SettingsIcon />
