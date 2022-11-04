@@ -16,6 +16,7 @@ import {
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './productDetail.scss';
 import avatar1 from '../../assets/images/avatar1.png';
@@ -75,24 +76,20 @@ function ProductDetail() {
       return item.product === productId;
     });
 
-    // if (cartItemFilter) {
-    //   setProductType({
-    //     ...productType,
-    //     quantity: cartItemFilter.quantity + productType.quantity,
-    //   });
-    // }
     if (cartItemFilter) {
-      newQty = cartItemFilter.quantity + 1;
+      newQty = cartItemFilter.quantity + productType.quantity;
+      setProductType({ ...productType, quantity: newQty });
     } else {
       newQty = 1;
+      setProductType({ ...productType, quantity: newQty });
     }
-    if (currentProduct.amount > 0) {
-      dispatch(addItemsToCart({ productId, ...productType }));
+    // if (currentProduct.amount > 0) {
+    dispatch(addItemsToCart({ productId, ...productType }));
 
-      // toast.success("Product Added to cart");
-    } else {
-      // toast.error("Product stock limited");
-    }
+    toast.success('Product Added to cart');
+    // } else {
+    //   // toast.error("Product stock limited");
+    // }
   };
 
   React.useEffect(() => {
@@ -420,6 +417,17 @@ function ProductDetail() {
           </div>
         </div>
       )}
+      <ToastContainer
+        position='bottom-center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 }
