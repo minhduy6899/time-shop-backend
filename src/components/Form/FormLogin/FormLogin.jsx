@@ -19,6 +19,7 @@ function FormLogin({
   openFormLogin,
   setOpenFormLogin,
   display,
+  setOpenModalAdmin,
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -93,6 +94,9 @@ function FormLogin({
     if (!error && user) {
       let userLoginInfo = JSON.parse(localStorage.getItem('userLogin'));
       if (userLoginInfo && setUserLogin) {
+        if (user.username === 'admin') {
+          setOpenModalAdmin(true);
+        }
         setUserLogin(userLoginInfo);
       }
       setOpenFormLogin(false);
@@ -114,7 +118,7 @@ function FormLogin({
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box className='form-login-container'>
+        <Box className='form-login-container form-login-width'>
           <div className='form-login-content'>
             <div className='left'></div>
             {changeForm === 'register' ? (
@@ -149,27 +153,29 @@ function FormLogin({
                     <label htmlFor='password'>Password:</label>
                   </div>
                 </div>
-                <div className='floating-label'>
-                  <input
-                    onChange={(e) => handleChangeRegister(e)}
-                    placeholder='Fullname'
-                    type='text'
-                    name='fullName'
-                    id='fullname'
-                    autoComplete='off'
-                  />
-                  <label htmlFor='fullname'>Fullname:</label>
-                </div>
-                <div className='floating-label'>
-                  <input
-                    onChange={(e) => handleChangeRegister(e)}
-                    placeholder='Phone'
-                    type='number'
-                    name='phone'
-                    id='phone'
-                    autoComplete='off'
-                  />
-                  <label htmlFor='phone'>Phone:</label>
+                <div className='d-flex'>
+                  <div className='floating-label'>
+                    <input
+                      onChange={(e) => handleChangeRegister(e)}
+                      placeholder='Fullname'
+                      type='text'
+                      name='fullName'
+                      id='fullname'
+                      autoComplete='off'
+                    />
+                    <label htmlFor='fullname'>Fullname:</label>
+                  </div>
+                  <div className='floating-label'>
+                    <input
+                      onChange={(e) => handleChangeRegister(e)}
+                      placeholder='Phone'
+                      type='number'
+                      name='phone'
+                      id='phone'
+                      autoComplete='off'
+                    />
+                    <label htmlFor='phone'>Phone:</label>
+                  </div>
                 </div>
                 <div className='floating-label'>
                   <input
@@ -225,7 +231,7 @@ function FormLogin({
                     type='email'
                     name='username'
                     id='email'
-                    autoComplete='off'
+                    autoComplete='on'
                   />
                   <label htmlFor='email'>Email:</label>
                 </div>
@@ -236,7 +242,7 @@ function FormLogin({
                     type='password'
                     name='password'
                     id='password'
-                    autoComplete='off'
+                    autoComplete='on'
                   />
                   <label htmlFor='password'>Password:</label>
                 </div>

@@ -11,6 +11,7 @@ import {
   Select,
   Badge,
   Button,
+  Modal,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Stack } from '@mui/system';
@@ -19,6 +20,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
+import GradingIcon from '@mui/icons-material/Grading';
 
 import phone from '../../../assets/images/phone.png';
 import cart from '../../../assets/images/cart.png';
@@ -44,11 +46,15 @@ function Header() {
   const [userLogin, setUserLogin] = useState(null);
   const [openFormLogin, setOpenFormLogin] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openModalAdmin, setOpenModalAdmin] = React.useState(false);
   const openMenuUser = Boolean(anchorEl);
   const navigate = useNavigate();
 
   const handleOpenFormLogin = () => setOpenFormLogin(true);
   const handleCloseFormLogin = () => setOpenFormLogin(false);
+
+  const handleCloseModalAdmin = () => setOpenModalAdmin(false);
+  const handleOpenModalAdmin = () => setOpenModalAdmin(true);
 
   let Quantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   let Price = cartItems
@@ -62,6 +68,10 @@ function Header() {
 
   const handleOpenMenuUser = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleViewOrders = () => {
+    navigate('/orders');
   };
 
   const logoutGoogle = useCallback(() => {
@@ -351,9 +361,9 @@ function Header() {
                             &nbsp;
                             {userLogin?.displayName}
                           </MenuItem>
-                          <MenuItem onClick={handleClose}>
-                            <SettingsIcon />
-                            &nbsp; Setting
+                          <MenuItem onClick={handleViewOrders}>
+                            <GradingIcon />
+                            &nbsp; Your orders
                           </MenuItem>
                           <MenuItem onClick={logoutGoogle}>
                             <LogoutIcon />
@@ -379,6 +389,8 @@ function Header() {
                           openFormLogin={openFormLogin}
                           setOpenFormLogin={setOpenFormLogin}
                           handleCloseFormLogin={handleCloseFormLogin}
+                          setOpenModalAdmin={setOpenModalAdmin}
+                          handleOpenModalAdmin={handleOpenModalAdmin}
                         />
                       </Box>
                     )}
@@ -407,6 +419,56 @@ function Header() {
             <MenuItem>Logout</MenuItem>
           </Menu>
         </AppBar>
+
+        <Modal
+          open={openModalAdmin}
+          onClose={handleCloseModalAdmin}
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'
+        >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 400,
+              bgcolor: 'background.paper',
+              border: '2px solid #000',
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <Typography
+              id='modal-modal-title'
+              variant='h5'
+              component='h2'
+              align='center'
+              m={2}
+            >
+              Do you want to go to Admin page?
+            </Typography>
+            <div
+              style={{
+                alignContent: 'center',
+                marginLeft: 'auto',
+                display: 'flex',
+                justifyContent: 'flex-end',
+              }}
+            >
+              <Button
+                variant='contained'
+                color='error'
+                sx={{ marginRight: '10px' }}
+              >
+                Cancel
+              </Button>
+              <a href='http://localhost:3000/'>
+                <Button variant='contained'>Confirm</Button>
+              </a>
+            </div>
+          </Box>
+        </Modal>
 
         <nav className='nav-bottom navbar navbar-expand-lg bg-dark'>
           <div className='container-fluid'>

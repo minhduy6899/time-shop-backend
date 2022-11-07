@@ -27,7 +27,7 @@ const CheckoutSteps = ({ activeStep }) => {
   };
 
   return (
-    <div style={{ width: '500px', marginLeft: 'auto', marginRight: 'auto' }}>
+    <div className='checkout-step'>
       <Stepper
         alternativeLabel
         activeStep={activeStep}

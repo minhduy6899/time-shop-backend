@@ -1,3 +1,7 @@
+@use '../../scss/' as vn;
+@import '../../scss/variables';
+@import '../../scss/mixin';
+
 .shippingContainer {
   width: 100vw;
   max-width: 100%;
@@ -8,9 +12,11 @@
 }
 
 .shippingBox {
+  @include mobile {
+    // width: 80vw;
+  }
   background-color: white;
-  width: 50vw;
-  height: 90vh;
+  width: 60vw;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -78,7 +84,6 @@
 @media screen and (max-width: 600px) {
   .shippingBox {
     width: 100vw;
-    height: 95vh;
   }
 
   .shippingHeading {

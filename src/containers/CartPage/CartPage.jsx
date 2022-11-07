@@ -20,7 +20,7 @@ function CartPage() {
   return (
     <div className='card-page'>
       <Header />
-      <BreadCrumb title='Card' breadCrumd={breadCrumb} />
+      <BreadCrumb title='Cart' breadCrumd={breadCrumb} />
       <div className='shopping-cart'>
         <div className='title'></div>
         <Carts />

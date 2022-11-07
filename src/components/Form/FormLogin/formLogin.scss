@@ -19,7 +19,13 @@
   border: 1px solid gray;
   box-shadow: 24;
   &.form-login-width {
-    width: 400px;
+    @include tablet {
+      width: 350px;
+    }
+    @include mobile {
+      width: 280px;
+    }
+    width: 600px;
   }
 }
 .form-login-content {
@@ -32,6 +38,13 @@
   border-radius: 4px;
   box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.12);
   .left {
+    @include tablet {
+      display: none;
+    }
+    @include mobile {
+      display: none;
+    }
+    display: block;
     width: 220px;
     height: auto;
     min-height: 100%;
@@ -44,6 +57,9 @@
   }
 
   .log-in {
+    @include mobile {
+      padding: 40px 15px;
+    }
     padding: 40px 30px;
     background: #fefefe;
     display: flex;

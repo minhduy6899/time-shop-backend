@@ -44,21 +44,21 @@ const MyOrders = () => {
       flex: 0.5,
     },
 
-    {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Link to={`/order/${params.getValue(params.id, "id")}`}>
-            <LaunchIcon />
-          </Link>
-        );
-      },
-    },
+    // {
+    //   field: "actions",
+    //   flex: 0.3,
+    //   headerName: "Actions",
+    //   minWidth: 150,
+    //   type: "number",
+    //   sortable: false,
+    //   renderCell: (params) => {
+    //     return (
+    //       <Link to={`/order/${params.getValue(params.id, "id")}`}>
+    //         <LaunchIcon />
+    //       </Link>
+    //     );
+    //   },
+    // },
   ];
   const rows = [];
 
@@ -88,7 +88,7 @@ const MyOrders = () => {
           <h1>YOUR ORDER IS EMTY !!!</h1>
         </div> : */}
       <div className="myOrdersPage">
-        <Typography id="myOrdersHeading">{user?.fullName}'s Orders</Typography>
+        <Typography className="myOrdersHeading">{user?.fullName}'s Orders</Typography>
         <DataGrid
           rows={rows}
           columns={columns}
