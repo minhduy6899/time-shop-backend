@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_CART_ITEM,
   SAVE_SHIPPING_INFO,
+  ADD_TO_CART_SUCCESS
 } from "../constants/cartType";
 import axios from "axios";
 // id, quantity, color, size
@@ -23,6 +24,8 @@ export const addItemsToCart = (productType) => async (dispatch, getState) => {
       quantity: productType.quantity,
     },
   });
+
+  dispatch({ type: ADD_TO_CART_SUCCESS })
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cartReducer.cartItems));
 };

@@ -1,44 +1,44 @@
-import {
-  ADD_TO_FAVOURITE,
-  REMOVE_FROM_FAVOURITE,
-} from "../constants/favourite";
+// import {
+//   ADD_TO_FAVOURITE,
+//   REMOVE_FROM_FAVOURITE,
+// } from "../constants/favourite";
 
-const favouriteReducer = (
-  state = { favouriteItems: [] },
-  action
-) => {
-  switch (action.type) {
-    case ADD_TO_FAVOURITE:
-      const item = action.payload;
+// const favouriteReducer = (
+//   state = { favouriteItems: [] },
+//   action
+// ) => {
+//   switch (action.type) {
+//     case ADD_TO_FAVOURITE:
+//       const item = action.payload;
 
-      const isItemExist = state.favouriteItems.find(
-        (i) => i.product === item.product
-      );
+//       const isItemExist = state.favouriteItems.find(
+//         (i) => i.product === item.product
+//       );
 
-      if (isItemExist) {
-        return {
-          ...state,
-          favouriteItems: state.favouriteItems.map((i) =>
-            i.product === isItemExist.product ? item : i
-          ),
-        };
-      } else {
-        return {
-          ...state,
-          favouriteItems: [...state.favouriteItems, item],
-        };
-      }
+//       if (isItemExist) {
+//         return {
+//           ...state,
+//           favouriteItems: state.favouriteItems.map((i) =>
+//             i.product === isItemExist.product ? item : i
+//           ),
+//         };
+//       } else {
+//         return {
+//           ...state,
+//           favouriteItems: [...state.favouriteItems, item],
+//         };
+//       }
 
-    case REMOVE_FROM_FAVOURITE:
-      return {
-        ...state,
-        favouriteItems: state.favouriteItems.filter((i) => i.product !== action.payload),
-      };
+//     case REMOVE_FROM_FAVOURITE:
+//       return {
+//         ...state,
+//         favouriteItems: state.favouriteItems.filter((i) => i.product !== action.payload),
+//       };
 
-    default:
-      return state;
-  }
-};
+//     default:
+//       return state;
+//   }
+// };
 
-export default favouriteReducer
+// export default favouriteReducer
 

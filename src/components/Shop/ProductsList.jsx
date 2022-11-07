@@ -110,7 +110,7 @@ function ProductsList({ dataFilter, getDataFilter }) {
           products.map((item, index) => (
             <ProductCard
               item={item}
-              index={index}
+              key={index}
               link={'/products/'}
               handleOpen={handleOpenModal}
             />

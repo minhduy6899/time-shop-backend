@@ -13,7 +13,7 @@ import {
   Button,
   Modal,
 } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Stack } from '@mui/system';
 import TemporaryDrawer from '../../../materialUI/TemporaryDrawer';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -40,8 +40,10 @@ import FormLogin from '../../Form/FormLogin/FormLogin';
 import logoBlack from '../../../assets/images/logo.png';
 import logoWhite from '../../../assets/images/logo2.png';
 import ModalCartList from '../../Modal/ModalCartList';
+import { CLEAR_ERRORS } from '../../../constants/user';
 
 function Header() {
+  const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartReducer);
   const [userLogin, setUserLogin] = useState(null);
   const [openFormLogin, setOpenFormLogin] = React.useState(false);
@@ -51,7 +53,10 @@ function Header() {
   const navigate = useNavigate();
 
   const handleOpenFormLogin = () => setOpenFormLogin(true);
-  const handleCloseFormLogin = () => setOpenFormLogin(false);
+  const handleCloseFormLogin = () => {
+    dispatch({ type: CLEAR_ERRORS });
+    setOpenFormLogin(false);
+  };
 
   const handleCloseModalAdmin = () => setOpenModalAdmin(false);
   const handleOpenModalAdmin = () => setOpenModalAdmin(true);
@@ -463,7 +468,7 @@ function Header() {
               >
                 Cancel
               </Button>
-              <a href='http://localhost:3000/'>
+              <a href='http://localhost:3001/'>
                 <Button variant='contained'>Confirm</Button>
               </a>
             </div>
@@ -550,7 +555,11 @@ function Header() {
                   </Link>
                 </li>
               </ul>
-              <form className='d-flex' role='search'>
+              <form
+                // className='d-flex'
+                role='search'
+                style={{ display: 'none' }}
+              >
                 <div className='search__container'>
                   <input
                     className='search__input'
@@ -593,7 +602,7 @@ function Header() {
           </div>
         </div>
         <div className='header-bottom-mobile d-flex align-items-center'>
-          <form className='search-form'>
+          <form className='search-form' style={{ display: 'none' }}>
             <input
               type='search'
               placeholder='Search'

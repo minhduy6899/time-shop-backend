@@ -22,7 +22,7 @@ const ConfirmOrder = ({ history }) => {
   const shippingCharges =
     subtotal > 3000 ? 0 : subtotal > 2000 ? 100 : subtotal > 1000 ? 150 : 200;
 
-  const tax = subtotal * 0.18;
+  const tax = Math.floor(subtotal * 0.18);
 
   const totalPrice = subtotal + tax + shippingCharges;
 

@@ -10,10 +10,10 @@ import './contact.scss';
 function Contact() {
   return (
     <div className='container mt-5'>
-      <div class='row'>
-        <div class='col'>
+      <div className='row'>
+        <div className='col'>
           <div id='google_map'>
-            <div class='map_container'>
+            <div className='map_container'>
               <div id='map'>
                 <iframe
                   src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9885.88567619595!2d105.5752365188562!3d10.483614010721483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310a6f20b1ec6bf9%3A0x32f45932592ca69e!2zTmjDoCBLaMOhY2ggTWluaCBEdXkgKFRyYW5nIHRyw60gdGnhu4djIGPGsOG7m2kp!5e0!3m2!1svi!2s!4v1667225568520!5m2!1svi!2s'

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { json, Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import LaunchIcon from "@mui/icons-material/Launch";
 
@@ -14,9 +14,10 @@ const MyOrders = () => {
   const { loading, error, orders } = useSelector((state) => state.myOrdersReducer);
   const { user } = useSelector((state) => state.userReducer);
 
+  let userName = JSON.parse(localStorage.getItem('user'))
+
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.6 },
-
     {
       field: "status",
       headerName: "Status",
@@ -83,12 +84,8 @@ const MyOrders = () => {
 
   return (
     <Fragment>
-      {/* {orders ?
-        <div className="d-flex justify-content-center p-5">
-          <h1>YOUR ORDER IS EMTY !!!</h1>
-        </div> : */}
       <div className="myOrdersPage">
-        <Typography className="myOrdersHeading">{user?.fullName}'s Orders</Typography>
+        <Typography className="myOrdersHeading">{userName?.displayName}'s Orders</Typography>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -99,8 +96,6 @@ const MyOrders = () => {
         />
 
       </div>
-      {/* } */}
-
     </Fragment>
   );
 };

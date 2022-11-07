@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_CART_ITEM,
   SAVE_SHIPPING_INFO,
+  ADD_TO_CART_SUCCESS
 } from "../constants/cartType";
 
 const cartReducer = (
@@ -28,6 +29,12 @@ const cartReducer = (
           ...state,
           cartItems: [...state.cartItems, item],
         };
+      }
+
+    case ADD_TO_CART_SUCCESS:
+      return {
+        ...state,
+        message: 'add to cart success'
       }
 
     case REMOVE_CART_ITEM:

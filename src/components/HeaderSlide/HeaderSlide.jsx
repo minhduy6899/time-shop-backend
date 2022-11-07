@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import CurrencyPoundIcon from '@mui/icons-material/CurrencyPound';
 
 import './headerSlide.scss';
+import { Link } from 'react-router-dom';
 
 const dataSlideHeader = [
   {
@@ -66,7 +67,7 @@ function HeaderSlide() {
                 </p>
                 <div className='slide-item-button'>
                   <button>
-                    <a href='/#'>SHOP NOW</a>
+                    <Link to='/products'>SHOP NOW</Link>
                   </button>
                 </div>
               </div>

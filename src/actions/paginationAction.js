@@ -20,10 +20,6 @@ export const getProductsAction = (dataFilter) => async dispatch => {
   var requestOptions = {
     method: 'GET',
     redirect: 'follow',
-    // use the authorization
-    // headers: {
-    //   Authorization: "Bearer " + localStorage.getItem("@token"),
-    // },
   }
   try {
     const response = await fetch(

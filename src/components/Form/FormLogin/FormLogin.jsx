@@ -39,6 +39,7 @@ function FormLogin({
       [e.target.name]: e.target.value.trim(),
     });
   };
+
   const handleChangeLogin = (e) => {
     updateFormDataLogin({
       ...formDataLogin,
@@ -47,6 +48,7 @@ function FormLogin({
       [e.target.name]: e.target.value.trim(),
     });
   };
+
   const handleChangeForm = (e, form) => {
     e.preventDefault();
     setChangeForm(form);
@@ -129,6 +131,11 @@ function FormLogin({
                 <p className='login-form-description'>
                   Hi there! Let join with us.
                 </p>
+                {error && (
+                  <small style={{ color: 'red', margin: 'auto' }}>
+                    {error}
+                  </small>
+                )}
                 <div className='d-flex'>
                   <div className='floating-label'>
                     <input

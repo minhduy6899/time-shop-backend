@@ -76,7 +76,8 @@ export const login = (userData) => async (dispatch) => {
       })
     );
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error });
+    console.log('check error: ', error)
+    dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
   }
 };
 
@@ -88,7 +89,7 @@ export const register = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(`https://timekeeper-back-end.herokuapp.com/customers`, userData, config);
-
+    console.log('check data user: ', data)
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
     localStorage.setItem('@token', data.accessToken);
     localStorage.setItem(

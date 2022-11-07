@@ -62,7 +62,7 @@ const ProductCard = ({ index, item, handleOpen, link }) => {
                 addToCartHandler(item?._id, item?.color, item?.size)
               }
             />
-            <FavoriteBorderOutlinedIcon className='icon-action' />
+            {/* <FavoriteBorderOutlinedIcon className='icon-action' /> */}
             <RemoveRedEyeOutlinedIcon
               onClick={() => handleOpen(item?._id)}
               className='icon-action'
