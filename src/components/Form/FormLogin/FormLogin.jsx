@@ -10,6 +10,7 @@ import userSignin from '../../../assets/images/user.png';
 import auth from '../../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFirebase, register, login } from '../../../actions/userAction';
+import { CLEAR_ERRORS } from '../../../constants/user';
 // import { async } from '@firebase/util';
 
 function FormLogin({
@@ -51,6 +52,7 @@ function FormLogin({
 
   const handleChangeForm = (e, form) => {
     e.preventDefault();
+    dispatch({ type: CLEAR_ERRORS });
     setChangeForm(form);
   };
 
