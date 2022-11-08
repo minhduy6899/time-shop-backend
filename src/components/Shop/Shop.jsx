@@ -6,7 +6,8 @@ import ProductsList from './ProductsList';
 
 function Shop() {
   const [dataFilter, setDataFilter] = useState({
-    limit: 30,
+    skip: 1,
+    limit: 6,
     productName: 'ALL',
     promotionPrice: [0, 1000],
 

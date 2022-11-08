@@ -22,17 +22,14 @@ export const getProductItemAction = (value) => async dispatch => {
 
 }
 
-export const getProductsFilterAction = (dataFilter) => async dispatch => {
-    const { limit, productName, promotionPrice } = dataFilter
-    const minPrice = dataFilter.promotionPrice[0]
-    const maxPrice = dataFilter.promotionPrice[1]
+export const getProductsFilterAction = () => async dispatch => {
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
     }
     try {
         const response = await fetch(
-            `https://timekeeper-back-end.herokuapp.com/products?limit=${limit}&productName=${productName}&minPrice=${minPrice}&maxPrice=${maxPrice}`, requestOptions
+            `https://timekeeper-back-end.herokuapp.com/allProducts`, requestOptions
         );
 
         const data = await response.json();

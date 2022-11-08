@@ -20,7 +20,8 @@ export default function paginationReducers(state = initialState, action) {
     case FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
-        products: action.data.slice((state.currentPage - 1) * limit, state.currentPage * limit),
+        products: action.data,
+        // products: action.data.slice((state.currentPage - 1) * limit, state.currentPage * limit),
         noPage: Math.ceil(action.data.length / limit),
         pending: false
       }

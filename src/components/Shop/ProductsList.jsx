@@ -21,7 +21,11 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 import './productsList.scss';
-import { getProductItemAction } from '../../actions/getAllProductsAction';
+import {
+  getAllProductsAction,
+  getProductItemAction,
+  getProductsFilterAction,
+} from '../../actions/getAllProductsAction';
 import ModalProductDetail from '../Modal/ModalProductDetail';
 import {
   changePagePagination,
@@ -35,8 +39,13 @@ function ProductsList({ dataFilter, getDataFilter }) {
   const { currentPage, products, noPage } = useSelector(
     (reduxData) => reduxData.pagiantionReducers
   );
+  const { noAllPage } = useSelector(
+    (reduxData) => reduxData.getAllProductsReducer
+  );
+
   const changePageHandler = (event, value) => {
     dispatch(changePagePagination(value));
+    getDataFilter({ ...dataFilter, skip: value });
   };
 
   const [productsFiltered, setProductsFiltered] = useState(false);
@@ -46,7 +55,8 @@ function ProductsList({ dataFilter, getDataFilter }) {
   React.useEffect(() => {
     dispatch(
       getProductsAction({
-        limit: 30,
+        skip: 1,
+        limit: 6,
         productName: 'ALL',
         promotionPrice: [0, 1000],
 
@@ -56,6 +66,7 @@ function ProductsList({ dataFilter, getDataFilter }) {
         sortProducts: 'ALL',
       })
     );
+    dispatch(getAllProductsAction());
   }, []);
 
   React.useEffect(() => {
@@ -77,6 +88,8 @@ function ProductsList({ dataFilter, getDataFilter }) {
     dispatch(getProductItemAction(productId));
     setOpen(true);
   };
+
+  console.log('check product filtered; >>>> ', products);
 
   return (
     <>
@@ -128,7 +141,7 @@ function ProductsList({ dataFilter, getDataFilter }) {
               <Pagination
                 color='warning'
                 size='small'
-                count={noPage}
+                count={noAllPage}
                 defaultPage={1}
                 onChange={changePageHandler}
               />

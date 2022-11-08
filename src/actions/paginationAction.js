@@ -14,7 +14,7 @@ export function changePagePagination(value) {
 
 export const getProductsAction = (dataFilter) => async dispatch => {
 
-  const { limit, productName, promotionPrice, productCategories, productColor, productSize, sortProducts } = dataFilter
+  const { skip, limit, productName, promotionPrice, productCategories, productColor, productSize, sortProducts } = dataFilter
   const minPrice = dataFilter.promotionPrice[0]
   const maxPrice = dataFilter.promotionPrice[1]
   var requestOptions = {
@@ -23,7 +23,7 @@ export const getProductsAction = (dataFilter) => async dispatch => {
   }
   try {
     const response = await fetch(
-      `https://timekeeper-back-end.herokuapp.com/products?limit=${limit}&productName=${productName}&minPrice=${minPrice}&maxPrice=${maxPrice}&productCategories=${productCategories}&productColor=${productColor}&productSize=${productSize}&sortProducts=${sortProducts}`, requestOptions
+      `https://timekeeper-back-end.herokuapp.com/products?skip=${skip}&limit=${limit}&productName=${productName}&minPrice=${minPrice}&maxPrice=${maxPrice}&productCategories=${productCategories}&productColor=${productColor}&productSize=${productSize}&sortProducts=${sortProducts}`, requestOptions
     );
 
     const data = await response.json();

@@ -1,10 +1,13 @@
 import { GET_PRODUCT_ITEM, GET_ALL_PRODUCTS, GET_PRODUCT_FILTER_ITEM, GET_PRODUCTS_PENDING } from "../constants/getAllProducts";
 
+const limit = 6
+
 const initialState = {
   currentProduct: "ALL",
   productsFilter: [],
   productsList: [],
   loading: false,
+  noAllPage: 1,
 }
 
 export default function getAllProductsReducer(state = initialState, action) {
@@ -28,7 +31,8 @@ export default function getAllProductsReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        productsList: action.payload
+        productsList: action.payload,
+        noAllPage: Math.ceil(action.payload.length / limit)
       }
     default:
       return state;

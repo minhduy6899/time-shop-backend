@@ -392,7 +392,7 @@ function Blog() {
                       type='text'
                       className='form-control'
                       placeholder='Search Posts'
-                      onfocus="this.placeholder = ''"
+                      onFocus="this.placeholder = ''"
                       onblur="this.placeholder = 'Search Posts'"
                     />
                     <span className='input-group-btn'>
@@ -540,7 +540,7 @@ function Blog() {
                         className='form-control'
                         id='inlineFormInputGroup'
                         placeholder='Enter email'
-                        onfocus="this.placeholder = ''"
+                        onFocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Enter email'"
                       />
                     </div>
