@@ -6,15 +6,19 @@
   width: 100vw;
   max-width: 100%;
   padding: 0 0 680px 0;
-  margin: 5rem 0;
+  margin: 5rem 0 9rem 0;
   box-sizing: border-box;
-  background-color: rgb(235, 235, 235);
-  // position: fixed;
-  top: 0;
-  left: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
+
+  @include mobile {
+    margin-bottom: 12rem !important;
+  }
+
+  @include tablet {
+    margin-bottom: 12rem !important;
+  }
 
   .myOrdersHeading {
     text-align: center;
@@ -26,15 +30,30 @@
     color: rgb(255, 255, 255);
     transition: all 0.5s;
     background-color: rgb(44, 44, 44);
+    @include mobile {
+      font-size: 2rem !important;
+    }
+
+    @include tablet {
+      font-size: 2rem !important;
+    }
   }
 
   .myOrdersTable {
     background-color: white;
 
     div {
-      font: 300 1.4vmax 'Roboto';
+      font: 300 1.1vmax 'Roboto';
       color: rgba(0, 0, 0, 0.678);
       border: none;
+
+      @include mobile {
+        font-size: 1.2rem !important;
+      }
+
+      @include tablet {
+        font-size: 1.2rem !important;
+      }
     }
 
     a {
@@ -45,7 +64,23 @@
         color: $main-color;
       }
     }
+
+    .css-1jbbcbn-MuiDataGrid-columnHeaderTitle {
+      font-size: 1.6rem !important;
+      font-weight: 700;
+    }
   }
+}
+.greenColor .MuiDataGrid-cellContent {
+  color: green !important;
+}
+
+.redColor .MuiDataGrid-cellContent {
+  color: orange !important;
+}
+
+.orange .MuiDataGrid-cellContent {
+  color: rgb(29, 170, 236) !important;
 }
 
 @media screen and (max-width: 600px) {
@@ -54,12 +89,12 @@
     height: 93vh;
   }
 
-  .myOrdersHeading {
-    font: 400 2.2vmax 'Roboto';
-    padding: 4vw;
-  }
+  // .myOrdersHeading {
+  //   font: 400 2.2vmax 'Roboto';
+  //   padding: 4vw;
+  // }
 
-  .myOrdersTable div {
-    font: 300 4vw 'Roboto';
-  }
+  // .myOrdersTable div {
+  //   font: 300 4vw 'Roboto';
+  // }
 }

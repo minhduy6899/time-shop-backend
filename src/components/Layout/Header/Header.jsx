@@ -368,7 +368,7 @@ function Header() {
                           </MenuItem>
                           <MenuItem onClick={handleViewOrders}>
                             <GradingIcon />
-                            &nbsp; Your orders
+                            &nbsp; My orders
                           </MenuItem>
                           <MenuItem onClick={logoutGoogle}>
                             <LogoutIcon />
@@ -503,7 +503,7 @@ function Header() {
                     Shop
                   </Link>
                 </li>
-                <li className='nav-item dropdown nav-link-dropdown'>
+                {/* <li className='nav-item dropdown nav-link-dropdown'>
                   <Link
                     className='nav-link dropdown-toggle'
                     to='/products'
@@ -533,7 +533,7 @@ function Header() {
                       </Link>
                     </li>
                   </ul>
-                </li>
+                </li> */}
                 <li className='nav-item'>
                   <Link className='nav-link ' to='/'>
                     Specials

@@ -1,4 +1,4 @@
-import { CHANGE_PAGE_PAGINATION, FETCH_PRODUCTS_ERROR, FETCH_PRODUCTS_PENDING, FETCH_PRODUCTS_SUCCESS } from "../constants/pagination";
+import { CHANGE_PAGE_PAGINATION, FETCH_PRODUCTS_ERROR, FETCH_PRODUCTS_PENDING, FETCH_PRODUCTS_SUCCESS, FETCH_NOPAGE_SUCCESS } from "../constants/pagination";
 
 const limit = 6;
 
@@ -20,17 +20,24 @@ export default function paginationReducers(state = initialState, action) {
     case FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
-        products: action.data,
+        products: action.data.products,
         // products: action.data.slice((state.currentPage - 1) * limit, state.currentPage * limit),
-        noPage: Math.ceil(action.data.length / limit),
+        noPage: action.data.noPage,
         pending: false
       }
+    case FETCH_NOPAGE_SUCCESS:
+      return {
+        ...state,
+        // noPage: Math.ceil(action.data.length / limit),
+        pending: false
+      };
     case FETCH_PRODUCTS_ERROR:
       return {
         ...state,
         error: action.error,
         pending: false
       };
+
     case CHANGE_PAGE_PAGINATION:
       return {
         ...state,

@@ -18,7 +18,9 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import './temporaryDrawer.scss';
 
 export default function TemporaryDrawer({
   userLogin,
@@ -26,6 +28,7 @@ export default function TemporaryDrawer({
   loginGoogle,
   setOpenFormLogin,
 }) {
+  const navigate = useNavigate();
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -42,6 +45,10 @@ export default function TemporaryDrawer({
     }
 
     setState({ ...state, [anchor]: open });
+  };
+
+  const handleViewOrders = () => {
+    navigate('/orders');
   };
 
   const dataMenu = [
@@ -90,6 +97,10 @@ export default function TemporaryDrawer({
       title: 'Logout',
       icon: <LogoutOutlinedIcon />,
     },
+    {
+      title: 'My order',
+      icon: <FeaturedPlayListOutlinedIcon />,
+    },
   ];
 
   const list = (anchor) => (
@@ -116,30 +127,46 @@ export default function TemporaryDrawer({
                 }}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.title} />
+                <ListItemText primary={item.title} sx={{ fontSize: '50px' }} />
               </Link>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Divider />
+      <Divider sx={{ borderColor: 'gray' }} textAlign='center' />
       <List>
         <ListItem disablePadding>
           <ListItemButton>
             {userLogin ? (
-              <>
-                <img
-                  style={{
-                    width: '30px',
-                    borderRadius: '9999px',
-                    marginRight: '29px',
-                  }}
-                  src={userLogin.photoURL}
-                  alt='avatar'
-                />
+              <div>
+                <div className='d-flex mb-3 align-items-center'>
+                  <ListItemIcon>
+                    <FeaturedPlayListOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    onClick={() => handleViewOrders()}
+                    primary={'My order'}
+                    sx={{ fontSize: '50px' }}
+                  />
+                </div>
+                <div className='d-flex'>
+                  <img
+                    style={{
+                      width: '30px',
+                      borderRadius: '9999px',
+                      marginRight: '29px',
+                    }}
+                    src={userLogin.photoURL}
+                    alt='avatar'
+                  />
 
-                <ListItemText onClick={logoutGoogle} primary={'Logout'} />
-              </>
+                  <ListItemText
+                    onClick={logoutGoogle}
+                    primary={'Logout'}
+                    sx={{ fontSize: '50px' }}
+                  />
+                </div>
+              </div>
             ) : (
               <>
                 <ListItemIcon>
@@ -148,6 +175,7 @@ export default function TemporaryDrawer({
                 <ListItemText
                   onClick={() => setOpenFormLogin(true)}
                   primary={'Login'}
+                  sx={{ fontSize: '50px' }}
                 />
               </>
             )}
@@ -162,7 +190,7 @@ export default function TemporaryDrawer({
                 <ListItemIcon>
                   <HowToRegOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Register'} />
+                <ListItemText primary={'Register'} sx={{ fontSize: '50px' }} />
               </ListItemButton>
             </ListItem>
           </>

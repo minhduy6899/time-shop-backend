@@ -26,8 +26,10 @@ function MyOrderPage() {
   return (
     <div>
       <Header />
-      <BreadCrumb breadCrumd={breadCrumd} title='Your Order' linkTo='/orders' />
-      <MyOrders />
+      <BreadCrumb breadCrumd={breadCrumd} title='My Order' linkTo='/orders' />
+      <div className='container'>
+        <MyOrders />
+      </div>
       <Footer />
     </div>
   );

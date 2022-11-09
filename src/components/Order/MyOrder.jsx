@@ -1,65 +1,83 @@
-import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import { useSelector, useDispatch } from "react-redux";
-import { json, Link } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import LaunchIcon from "@mui/icons-material/Launch";
+import React, { Fragment, useEffect } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import { useSelector, useDispatch } from 'react-redux';
+import { json, Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import LaunchIcon from '@mui/icons-material/Launch';
 
-import { clearErrors, myOrders } from "../../actions/orderAction";
-import "./myOrder.scss";
+import { clearErrors, myOrders } from '../../actions/orderAction';
+import './myOrder.scss';
 
 const MyOrders = () => {
   const dispatch = useDispatch();
 
-  const { loading, error, orders } = useSelector((state) => state.myOrdersReducer);
+  const { loading, error, orders } = useSelector(
+    (state) => state.myOrdersReducer
+  );
   const { user } = useSelector((state) => state.userReducer);
 
-  let userName = JSON.parse(localStorage.getItem('user'))
+  let userName = JSON.parse(localStorage.getItem('userLogin'));
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.6 },
     {
-      field: "status",
-      headerName: "Status",
+      field: 'id',
+      headerName: 'Order ID',
       minWidth: 150,
-      flex: 0.3,
+      // type: 'string',
+      flex: 1,
+    },
+    {
+      field: 'status',
+      headerName: 'Status',
+      minWidth: 150,
+      // type: 'number',
+      flex: 1,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+        return params.getValue(params.id, 'status') === 'Shipped'
+          ? 'greenColor'
+          : params.getValue(params.id, 'status') === 'Loading'
+          ? 'orange'
+          : 'redColor';
       },
     },
     {
-      field: "itemsQty",
-      headerName: "Items Qty",
-      type: "number",
+      field: 'itemsQty',
+      headerName: 'Items Qty',
+      // type: 'number',
       minWidth: 100,
-      flex: 0.3,
+      flex: 1,
+    },
+    {
+      field: 'taxPrice',
+      headerName: 'Tax price',
+      // type: 'number',
+      minWidth: 100,
+      flex: 1,
     },
 
     {
-      field: "amount",
-      headerName: "Amount",
-      type: "number",
+      field: 'Total',
+      headerName: 'Total',
+      // type: 'number',
       minWidth: 150,
-      flex: 0.5,
+      flex: 1,
     },
 
-    // {
-    //   field: "actions",
-    //   flex: 0.3,
-    //   headerName: "Actions",
-    //   minWidth: 150,
-    //   type: "number",
-    //   sortable: false,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Link to={`/order/${params.getValue(params.id, "id")}`}>
-    //         <LaunchIcon />
-    //       </Link>
-    //     );
-    //   },
-    // },
+    {
+      field: 'actions',
+      flex: 0.3,
+      headerName: 'Actions',
+      minWidth: 150,
+      type: 'number',
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <Link to={`/order/${params.getValue(params.id, 'id')}`}>
+            <LaunchIcon />
+          </Link>
+        );
+      },
+    },
   ];
   const rows = [];
 
@@ -69,7 +87,8 @@ const MyOrders = () => {
         itemsQty: item.orderItems.length,
         id: item._id,
         status: item.orderStatus,
-        amount: item.totalPrice,
+        taxPrice: item.taxPrice,
+        Total: item.totalPrice,
       });
     });
 
@@ -81,20 +100,21 @@ const MyOrders = () => {
 
     dispatch(myOrders());
   }, [dispatch, alert, error]);
-
   return (
     <Fragment>
-      <div className="myOrdersPage">
-        <Typography className="myOrdersHeading">{userName?.displayName}'s Orders</Typography>
+      <div className='myOrdersPage'>
+        <Typography className='myOrdersHeading'>
+          {userName?.email}'s Orders
+        </Typography>
         <DataGrid
           rows={rows}
           columns={columns}
+          headerHeight={88}
           pageSize={10}
           disableSelectionOnClick
-          className="myOrdersTable"
+          className='myOrdersTable'
           autoHeight
         />
-
       </div>
     </Fragment>
   );

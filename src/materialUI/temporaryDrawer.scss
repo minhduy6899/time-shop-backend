@@ -1,0 +1,9 @@
+@use '../scss/' as vn;
+@import '../scss/variables';
+@import '../scss/mixin';
+
+.MuiTypography-root {
+  &.css-10hburv-MuiTypography-root {
+    font-size: 1.2rem !important;
+  }
+}

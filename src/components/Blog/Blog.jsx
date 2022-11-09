@@ -392,8 +392,8 @@ function Blog() {
                       type='text'
                       className='form-control'
                       placeholder='Search Posts'
-                      onFocus="this.placeholder = ''"
-                      onblur="this.placeholder = 'Search Posts'"
+                      onFocus='this.placeholder'
+                      onBlur="this.placeholder = 'Search Posts'"
                     />
                     <span className='input-group-btn'>
                       <button className='btn btn-default' type='button'>
@@ -540,8 +540,8 @@ function Blog() {
                         className='form-control'
                         id='inlineFormInputGroup'
                         placeholder='Enter email'
-                        onFocus="this.placeholder = ''"
-                        onblur="this.placeholder = 'Enter email'"
+                        onFocus='this.placeholder'
+                        onBlur="this.placeholder = 'Enter email'"
                       />
                     </div>
                     <a href='/#' className='bbtns'>

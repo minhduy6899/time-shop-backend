@@ -29,6 +29,7 @@ import {
 import ModalProductDetail from '../Modal/ModalProductDetail';
 import {
   changePagePagination,
+  getNoPage,
   getProductsAction,
 } from '../../actions/paginationAction';
 import ProductCard from '../../components/ProductCard/ProductCard';
@@ -89,8 +90,6 @@ function ProductsList({ dataFilter, getDataFilter }) {
     setOpen(true);
   };
 
-  console.log('check product filtered; >>>> ', products);
-
   return (
     <>
       <div className='product-layout'>
@@ -141,7 +140,7 @@ function ProductsList({ dataFilter, getDataFilter }) {
               <Pagination
                 color='warning'
                 size='small'
-                count={noAllPage}
+                count={noPage}
                 defaultPage={1}
                 onChange={changePageHandler}
               />

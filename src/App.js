@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-import './App.scss';
 import BlogPage from "./containers/BlogPage/BlogPage";
 import HomePage from './containers/HomePage/HomePage';
 import ProductDetailsPage from './containers/ProductDetailsPage/ProductDetailsPage';
@@ -13,6 +11,8 @@ import ConfirmPage from "./containers/ConfirmPage/ConfirmPage";
 import PaymentPage from "./containers/PaymentPage/PaymentPage";
 import OrderSuccess from "./components/Carts/OrderSuccess";
 import MyOrderPage from "./containers/OrderPage/MyOrderPage";
+import OrderDetailPage from "./containers/OrderDetailsPage/OrderDetailPage";
+import './App.scss';
 
 function App() {
   return (
@@ -30,6 +30,7 @@ function App() {
         <Route exact path="/payment" element={<PaymentPage />} />
         <Route exact path="/orderSuccess" element={<OrderSuccess />} />
         <Route exact path="/orders" element={<MyOrderPage />} />
+        <Route exact path="/order/:orderId" element={<OrderDetailPage />} />
       </Routes>
     </Router>
   );

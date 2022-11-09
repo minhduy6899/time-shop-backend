@@ -2,7 +2,8 @@ import {
   CHANGE_PAGE_PAGINATION,
   FETCH_PRODUCTS_ERROR,
   FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_PENDING
+  FETCH_PRODUCTS_PENDING,
+  FETCH_NOPAGE_SUCCESS
 } from "../constants/pagination";
 
 export function changePagePagination(value) {
@@ -23,17 +24,16 @@ export const getProductsAction = (dataFilter) => async dispatch => {
   }
   try {
     const response = await fetch(
-      `https://timekeeper-back-end.herokuapp.com/products?skip=${skip}&limit=${limit}&productName=${productName}&minPrice=${minPrice}&maxPrice=${maxPrice}&productCategories=${productCategories}&productColor=${productColor}&productSize=${productSize}&sortProducts=${sortProducts}`, requestOptions
+      `http://localhost:5000/products?skip=${skip}&limit=${limit}&productName=${productName}&minPrice=${minPrice}&maxPrice=${maxPrice}&productCategories=${productCategories}&productColor=${productColor}&productSize=${productSize}&sortProducts=${sortProducts}`, requestOptions
     );
 
     const data = await response.json();
     return dispatch({
       type: FETCH_PRODUCTS_SUCCESS,
-      data: data.products
+      data: data
     });
   } catch (err) {
     alert(err);
   }
-
 }
 

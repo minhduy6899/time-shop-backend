@@ -71,22 +71,18 @@ function ProductDetail() {
 
   let { productId } = useParams();
 
-  console.log('chekc current product: ', currentProduct);
   const selectProductType = () => {
     const cartItemFilter = cartItems.find((item, index) => {
       return item.product === productId;
     });
-    console.log('chekc cartItemFilter: ', cartItemFilter);
     if (cartItemFilter) {
       newQty = cartItemFilter.quantity + productType.quantity;
-      console.log('chekc newQty: ', newQty);
       setProductType({ ...productType, quantity: newQty });
     } else {
       newQty = 1;
       setProductType({ ...productType, quantity: newQty });
     }
     // if (currentProduct.amount > 0) {
-    console.log('>>>>>>>> productType: ', { productId, ...productType });
     dispatch(addItemsToCart({ productId, ...productType }));
 
     toast.success('Product Added to cart');

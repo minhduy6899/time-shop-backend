@@ -146,8 +146,8 @@ function Footer() {
             <div className='col-sm-12 text-center mb-5'>
               <div className='footer-bottom '>
                 <div className='copyright'>
-                  SP Time© 2021 Demo Store. All Rights Reserved. Designed by{' '}
-                  <a href='https://www.magentech.com/'>MagenTech.Com</a>
+                  SP Time© 2022 Demo Store. All Rights Reserved. Designed by{' '}
+                  <a href='https://www.magentech.com/'>Nguyen Minh Duy</a>
                 </div>
                 <div className='footer-payment'>
                   <img src={payment} alt='payment logos' />

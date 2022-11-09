@@ -10,6 +10,10 @@ const breadCrumd = [
     title: 'Home',
     url: '/',
   },
+  {
+    title: 'Blog',
+    url: '/blog',
+  },
 ];
 
 function BlogPage() {
