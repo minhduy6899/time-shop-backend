@@ -57,7 +57,7 @@ export const login = (userData) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      `https://timekeeper-back-end.herokuapp.com/login`,
+      `https://time-shop-backend.onrender.com/login`,
       userData,
       config
     );
@@ -87,7 +87,7 @@ export const register = (userData) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "application/json" } };
 
-    const { data } = await axios.post(`https://timekeeper-back-end.herokuapp.com/customers`, userData, config);
+    const { data } = await axios.post(`https://time-shop-backend.onrender.com/customers`, userData, config);
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
     localStorage.setItem('@token', data.accessToken);
     localStorage.setItem(
@@ -114,7 +114,7 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`https://timekeeper-back-end.herokuapp.com/customers`);
+    const { data } = await axios.get(`https://time-shop-backend.onrender.com/customers`);
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {

@@ -33,7 +33,7 @@ export const createOrder = (order) => async (dispatch) => {
         "Authorization": "Bearer " + localStorage.getItem("@token"),
       },
     };
-    const { data } = await axios.post("https://timekeeper-back-end.herokuapp.com/orders", order, config);
+    const { data } = await axios.post("https://time-shop-backend.onrender.com/orders", order, config);
 
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
@@ -56,7 +56,7 @@ export const myOrders = () => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.get("https://timekeeper-back-end.herokuapp.com/orders/me", config);
+    const { data } = await axios.get("https://time-shop-backend.onrender.com/orders/me", config);
 
     dispatch({ type: MY_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -72,7 +72,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`https://timekeeper-back-end.herokuapp.com/order/${id}`);
+    const { data } = await axios.get(`https://time-shop-backend.onrender.com/order/${id}`);
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
   } catch (error) {

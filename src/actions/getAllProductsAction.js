@@ -7,7 +7,7 @@ export const getProductItemAction = (value) => async dispatch => {
     }
     try {
         const response = await fetch(
-            `https://timekeeper-back-end.herokuapp.com/products/${value}`, requestOptions
+            `https://time-shop-backend.onrender.com/products/${value}`, requestOptions
         );
 
         const data = await response.json();
@@ -29,7 +29,7 @@ export const getProductsFilterAction = () => async dispatch => {
     }
     try {
         const response = await fetch(
-            `https://timekeeper-back-end.herokuapp.com/allProducts`, requestOptions
+            `https://time-shop-backend.onrender.com/allProducts`, requestOptions
         );
 
         const data = await response.json();
@@ -57,7 +57,7 @@ export const getAllProductsAction = (value) => async dispatch => {
 
     try {
         const response = await fetch(
-            `https://timekeeper-back-end.herokuapp.com/allProducts?limit=${value}`, requestOptions
+            `https://time-shop-backend.onrender.com/allProducts?limit=${value}`, requestOptions
         );
 
         const data = await response.json();
