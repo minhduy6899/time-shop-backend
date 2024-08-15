@@ -16,7 +16,7 @@ function Contact() {
             <div className='map_container'>
               <div id='map'>
                 <iframe
-                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9885.88567619595!2d105.5752365188562!3d10.483614010721483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310a6f20b1ec6bf9%3A0x32f45932592ca69e!2zTmjDoCBLaMOhY2ggTWluaCBEdXkgKFRyYW5nIHRyw60gdGnhu4djIGPGsOG7m2kp!5e0!3m2!1svi!2s!4v1667225568520!5m2!1svi!2s'
+                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.970740658176!2d106.70725711180619!3d10.813550989292995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752919592bb033%3A0x5c96ad2008bbfb95!2zVG_DoCBuaMOgIEhvbWV0YWxr!5e0!3m2!1svi!2s!4v1723689807436!5m2!1svi!2s'
                   title='map'
                   width='600'
                   height='450'
@@ -25,6 +25,7 @@ function Contact() {
                   loading='lazy'
                   referrerPolicy='no-referrer-when-downgrade'
                 ></iframe>
+                
               </div>
             </div>
           </div>
